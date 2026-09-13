@@ -1,0 +1,14 @@
+id: prob_mc_integration
+version: 1
+title: Monte Carlo Integration and the Law of Large Numbers
+description: Approximate expectations and tail probabilities with simulation and quantify Monte Carlo
+  error.
+bloom: apply
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- Estimate P(X > 3) for a Student-t(4) by simulation and report the Monte Carlo standard error.
+- How many draws are needed so the MC standard error of a mean is below 1% of the posterior sd?
+- Why can any posterior summary be computed from draws without ever writing down the posterior density?
+tags:
+- prob

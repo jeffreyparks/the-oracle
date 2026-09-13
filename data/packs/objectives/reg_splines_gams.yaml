@@ -1,0 +1,14 @@
+id: reg_splines_gams
+version: 1
+title: Splines and Gaussian-Additive Smooths
+description: Use basis expansions and penalized splines to fit smooth nonlinear relationships with controlled
+  wiggliness.
+bloom: create
+difficulty: 4
+est_minutes: 55
+assessment_stems:
+- Fit a P-spline to a nonlinear trend and show how the smoothing prior controls wiggliness.
+- Explain the role of knot count versus the penalty prior; which matters more and why?
+- Compare a spline fit to a Gaussian process fit on the same data and state the trade-offs.
+tags:
+- reg

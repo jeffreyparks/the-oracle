@@ -1,0 +1,14 @@
+id: tool_python_prob_stack
+version: 1
+title: 'Tooling: Python Probability Stack Setup'
+description: Set up and run a reproducible Bayesian workflow environment with NumPy, SciPy, a PPL, and
+  ArviZ.
+bloom: apply
+difficulty: 1
+est_minutes: 40
+assessment_stems:
+- Install a PPL and ArviZ in a fresh environment, then draw and plot 10,000 Beta(2,5) samples.
+- Set a seed so a sampling run is byte-reproducible, and show the evidence.
+- Convert raw sampler output into an ArviZ InferenceData object and inspect its groups.
+tags:
+- tool

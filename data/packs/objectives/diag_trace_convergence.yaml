@@ -1,0 +1,13 @@
+id: diag_trace_convergence
+version: 1
+title: Trace Plots, Warmup, and Convergence by Eye
+description: Read trace and rank plots to spot non-convergence, stuck chains, and insufficient warmup.
+bloom: analyze
+difficulty: 2
+est_minutes: 45
+assessment_stems:
+- Given four trace plots, rank them from healthy to broken and justify each call.
+- Why must warmup draws be discarded, and why is warmup not just 'burn-in'?
+- Two chains explore different modes. What does that say about the posterior and the model?
+tags:
+- diag

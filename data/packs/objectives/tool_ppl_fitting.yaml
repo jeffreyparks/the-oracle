@@ -1,0 +1,14 @@
+id: tool_ppl_fitting
+version: 1
+title: 'Tooling: Fitting Models in a PPL (PyMC / Stan / NumPyro)'
+description: Specify, compile, and sample a model in at least one probabilistic programming language and
+  read its output.
+bloom: apply
+difficulty: 3
+est_minutes: 70
+assessment_stems:
+- Implement the same linear regression in two of PyMC, Stan, and NumPyro and confirm matching posteriors.
+- Read a sampler warning about maximum tree depth and state the concrete next action.
+- Explain what the PPL does with your prior statements at compile time.
+tags:
+- tool

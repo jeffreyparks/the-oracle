@@ -1,0 +1,14 @@
+id: reg_robust_outliers
+version: 1
+title: Robust Regression and Heavy Tails
+description: Replace Normal likelihoods with Student-t or mixture likelihoods to limit outlier influence.
+bloom: apply
+difficulty: 3
+est_minutes: 45
+assessment_stems:
+- Refit a regression with a Student-t likelihood and compare slope posteriors to the Normal fit.
+- Explain why estimating nu rather than fixing it is often better, and what the posterior of nu tells
+  you.
+- Contrast deleting outliers with modeling them; state the inferential cost of each.
+tags:
+- reg

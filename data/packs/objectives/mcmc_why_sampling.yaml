@@ -1,0 +1,14 @@
+id: mcmc_why_sampling
+version: 1
+title: 'Why Sampling: Intractable Posteriors and High Dimensions'
+description: Explain why normalizing constants are intractable and why grid and quadrature methods fail
+  in high dimensions.
+bloom: understand
+difficulty: 2
+est_minutes: 45
+assessment_stems:
+- Estimate the number of grid points needed for a 20-parameter model at 50 points per axis.
+- Explain 'typical set' and why the posterior mode is not where the mass is in high dimensions.
+- Name two models where conjugacy fails and say why.
+tags:
+- mcmc

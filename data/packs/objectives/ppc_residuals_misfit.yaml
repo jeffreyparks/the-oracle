@@ -1,0 +1,13 @@
+id: ppc_residuals_misfit
+version: 1
+title: Residual Analysis and Locating Misfit
+description: Use standardized and randomized-quantile residuals to find where and for whom a model fails.
+bloom: analyze
+difficulty: 3
+est_minutes: 50
+assessment_stems:
+- Compute randomized quantile residuals for a negative binomial model and check uniformity.
+- Group residuals by a held-out covariate to reveal a missing interaction.
+- Why can raw residuals mislead for discrete or heteroskedastic outcomes?
+tags:
+- ppc

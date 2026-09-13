@@ -1,0 +1,15 @@
+id: ts_structural_bsts
+version: 1
+title: Structural Time Series and BSTS-Style Decomposition
+description: Compose trend, seasonal, cycle, and regression components into an interpretable structural
+  model.
+bloom: create
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Build a structural model with trend, weekly seasonality, and a promotion regressor, then plot the component
+  decomposition.
+- Explain how spike-and-slab or regularized priors handle many candidate regressors.
+- Attribute a forecast change to a specific component and defend the attribution.
+tags:
+- ts

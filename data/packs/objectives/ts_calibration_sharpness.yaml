@@ -1,0 +1,13 @@
+id: ts_calibration_sharpness
+version: 1
+title: Forecast Calibration and Sharpness
+description: Assess calibration with PIT histograms and coverage, and balance it against sharpness.
+bloom: evaluate
+difficulty: 4
+est_minutes: 50
+assessment_stems:
+- Plot a PIT histogram for 500 forecasts; a U-shape appears. Diagnose the cause.
+- State the 'sharpness subject to calibration' principle and give a forecast that is calibrated but useless.
+- Report empirical coverage of 50% and 90% intervals by horizon and interpret the pattern.
+tags:
+- ts

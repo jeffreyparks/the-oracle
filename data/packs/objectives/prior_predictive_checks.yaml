@@ -1,0 +1,16 @@
+id: prior_predictive_checks
+version: 1
+title: Prior Predictive Checks
+description: Simulate data from the prior predictive distribution and reject priors that imply absurd
+  data.
+bloom: evaluate
+difficulty: 3
+est_minutes: 55
+assessment_stems:
+- Simulate 200 prior predictive datasets for a logistic model and show the priors imply near-certain 0/1
+  outcomes.
+- A height model's prior predictive contains negative heights. Diagnose which prior causes it and fix
+  it.
+- Describe a prior predictive check for a Poisson regression with a log link and an offset.
+tags:
+- prior

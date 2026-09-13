@@ -1,0 +1,13 @@
+id: diag_ess_mcse
+version: 1
+title: Effective Sample Size and Monte Carlo Standard Error
+description: Use bulk and tail ESS and MCSE to decide whether enough draws have been collected.
+bloom: evaluate
+difficulty: 3
+est_minutes: 50
+assessment_stems:
+- You have 4000 draws and bulk ESS 120. How many more draws are needed for MCSE below target?
+- Explain the difference between bulk ESS and tail ESS and which matters for a 99th percentile forecast.
+- Justify reporting posterior means to only two significant digits using MCSE.
+tags:
+- diag

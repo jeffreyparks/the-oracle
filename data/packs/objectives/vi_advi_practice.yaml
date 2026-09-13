@@ -1,0 +1,14 @@
+id: vi_advi_practice
+version: 1
+title: ADVI and Practical Variational Workflows
+description: Run automatic differentiation VI, diagnose its failure modes, and decide when to fall back
+  to MCMC.
+bloom: apply
+difficulty: 4
+est_minutes: 50
+assessment_stems:
+- Fit a model with ADVI and with NUTS and compare posterior means and sds; report where they diverge.
+- Interpret a non-converging ELBO trace and list two fixes.
+- Describe a diagnostic (e.g. importance-weighted check) that detects a bad variational approximation.
+tags:
+- vi

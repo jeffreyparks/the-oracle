@@ -1,0 +1,14 @@
+id: cmp_waic_loo
+version: 1
+title: WAIC and PSIS-LOO Cross-Validation
+description: Compute WAIC and PSIS-LOO, interpret elpd differences with standard errors, and check Pareto
+  k values.
+bloom: evaluate
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Two models differ by elpd_diff = 3.1 with se_diff = 4.0. What do you conclude?
+- Several Pareto k values exceed 0.7. Explain what that means and give two remedies.
+- Why is LOO invalid as written for time series, and what replaces it?
+tags:
+- cmp

@@ -1,0 +1,16 @@
+id: bayes_theorem
+version: 1
+title: Bayes' Theorem and the Anatomy of the Posterior
+description: Derive Bayes' theorem and identify prior, likelihood, evidence, and posterior in a worked
+  inference.
+bloom: understand
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and
+  explain the surprise.
+- Label prior, likelihood, and normalizing constant in a written-out posterior, and say which one does
+  not affect the shape.
+- Show algebraically why the posterior is unchanged if the likelihood is multiplied by a constant.
+tags:
+- bayes

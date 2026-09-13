@@ -1,0 +1,13 @@
+id: ts_scoring_rules
+version: 1
+title: 'Proper Scoring Rules: Log Score, CRPS, and Interval Scores'
+description: Score probabilistic forecasts with proper rules and explain why impropriety invites gaming.
+bloom: evaluate
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Compute CRPS for a sample-based predictive distribution and compare to MAE of the median.
+- Show that a scoring rule like MAPE is improper or degenerate, and construct a forecast that games it.
+- A model wins on CRPS but loses on log score. Explain what that reveals about its tails.
+tags:
+- ts

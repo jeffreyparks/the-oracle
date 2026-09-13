@@ -1,0 +1,14 @@
+id: ts_local_level_trend
+version: 1
+title: 'State Space Models: Local Level and Local Linear Trend'
+description: Express a series as a latent state plus observation noise and fit local level and local trend
+  models.
+bloom: create
+difficulty: 4
+est_minutes: 65
+assessment_stems:
+- Fit a local level model and interpret the ratio of state noise to observation noise.
+- Show how a local linear trend model handles a level shift, and where it fails.
+- Explain how missing observations are handled naturally in a state space formulation.
+tags:
+- ts

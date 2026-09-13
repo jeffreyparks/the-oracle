@@ -1,0 +1,14 @@
+id: prob_expectation_variance
+version: 1
+title: Expectation, Variance, and Moments
+description: Compute and interpret expectations, variances, covariances, and the law of total expectation/variance.
+bloom: apply
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- Use the law of total variance to decompose the variance of a hierarchical two-stage draw.
+- Show E[XY] != E[X]E[Y] when X and Y are dependent, with a concrete example.
+- A forecaster reports a mean of 100 and sd of 40 for a strictly positive quantity. What does this imply
+  about skew?
+tags:
+- prob

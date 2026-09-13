@@ -1,0 +1,15 @@
+id: reg_linear_bayesian
+version: 1
+title: Bayesian Linear Regression
+description: Fit and interpret a Bayesian linear regression, including priors on coefficients and the
+  residual scale.
+bloom: apply
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Fit a regression with standardized predictors, report coefficient posteriors, and interpret one in original
+  units.
+- Explain what the posterior of sigma tells you that R-squared does not.
+- Add a redundant, highly collinear predictor and describe what happens to the coefficient posteriors.
+tags:
+- reg

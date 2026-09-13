@@ -1,0 +1,13 @@
+id: diag_rhat
+version: 1
+title: R-hat and Between-Chain Agreement
+description: Compute and interpret split R-hat and explain what it can and cannot detect.
+bloom: analyze
+difficulty: 3
+est_minutes: 45
+assessment_stems:
+- All R-hat values are 1.00 but the model is wrong. Explain why R-hat did not catch it.
+- Why does R-hat require multiple chains with dispersed inits?
+- Interpret R-hat = 1.08 for one parameter and give the next three actions.
+tags:
+- diag

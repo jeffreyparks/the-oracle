@@ -1,0 +1,14 @@
+id: cmp_predictive_view
+version: 1
+title: Predictive Accuracy as the Comparison Target
+description: Frame model comparison as expected out-of-sample predictive accuracy rather than in-sample
+  fit.
+bloom: understand
+difficulty: 3
+est_minutes: 45
+assessment_stems:
+- Explain overfitting using expected log predictive density rather than 'too many parameters'.
+- Why does adding a predictor always improve in-sample fit but not necessarily prediction?
+- Define elpd in words and say what quantity it is an expectation over.
+tags:
+- cmp

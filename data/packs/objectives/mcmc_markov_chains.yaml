@@ -1,0 +1,14 @@
+id: mcmc_markov_chains
+version: 1
+title: Markov Chains, Stationarity, and Detailed Balance
+description: Explain how a Markov chain can have a target posterior as its stationary distribution.
+bloom: understand
+difficulty: 3
+est_minutes: 55
+assessment_stems:
+- Verify detailed balance for a simple two-state chain and find its stationary distribution.
+- Why does MCMC output violate the independence assumption of plain Monte Carlo error formulas?
+- State the conditions (irreducibility, aperiodicity) needed for convergence and give a chain that fails
+  one.
+tags:
+- mcmc

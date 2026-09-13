@@ -1,0 +1,14 @@
+id: prob_joint_marginal_transform
+version: 1
+title: Joint Distributions, Marginalization, and Change of Variables
+description: Marginalize and condition in joint distributions and apply the Jacobian change-of-variables
+  rule.
+bloom: apply
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Derive the density of Y = log X when X is LogNormal, showing the Jacobian term.
+- Given a bivariate Normal, derive the conditional mean and variance of X1 given X2.
+- Explain why marginalizing a nuisance parameter is not the same as fixing it at its mean.
+tags:
+- prob

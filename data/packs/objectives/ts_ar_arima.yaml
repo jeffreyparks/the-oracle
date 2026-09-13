@@ -1,0 +1,14 @@
+id: ts_ar_arima
+version: 1
+title: Bayesian AR, MA, and ARIMA Models
+description: Fit autoregressive and ARIMA-style models in a Bayesian framework with priors that enforce
+  stability.
+bloom: apply
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Fit an AR(2) with priors keeping the roots outside the unit circle and interpret the coefficients.
+- Explain how the initial conditions are handled and why they matter for short series.
+- Show the posterior forecast fan from an ARIMA model and explain why it widens.
+tags:
+- ts

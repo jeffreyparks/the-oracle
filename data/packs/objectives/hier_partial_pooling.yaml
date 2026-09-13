@@ -1,0 +1,13 @@
+id: hier_partial_pooling
+version: 1
+title: 'Partial Pooling: No Pooling, Complete Pooling, and Between'
+description: Explain hierarchical shrinkage as a compromise between pooled and separate estimates.
+bloom: analyze
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Fit all three pooling strategies to grouped data and plot the shrinkage of small-group estimates.
+- Why do small groups shrink more than large ones? Show the algebra for the Normal-Normal case.
+- A manager says shrinkage 'hides real differences.' Give the bias-variance answer.
+tags:
+- hier

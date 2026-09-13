@@ -1,0 +1,13 @@
+id: diag_divergences
+version: 1
+title: Divergences, Tree Depth, and Energy Diagnostics
+description: Diagnose HMC-specific pathologies and take the right corrective action.
+bloom: evaluate
+difficulty: 4
+est_minutes: 55
+assessment_stems:
+- You get 47 divergences concentrated in one region. Describe the geometry and two fixes.
+- Interpret a BFMI warning and say what it implies about the model, not just the sampler.
+- Why is 'raise target_accept until divergences vanish' sometimes hiding a real problem?
+tags:
+- diag

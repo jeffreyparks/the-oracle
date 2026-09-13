@@ -1,0 +1,15 @@
+id: bayes_posterior_summaries
+version: 1
+title: Posterior Summaries and Reporting
+description: Choose and report point estimates, intervals, and probability statements that answer the
+  actual question asked.
+bloom: evaluate
+difficulty: 2
+est_minutes: 45
+assessment_stems:
+- Report P(effect > 0), P(effect > a practical threshold), and the HDI for one posterior, and say which
+  the stakeholder needs.
+- When is the posterior mode a poor summary? Give a distribution where it misleads.
+- Rewrite a p-value-style conclusion as an honest posterior statement.
+tags:
+- bayes

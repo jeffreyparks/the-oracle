@@ -1,0 +1,13 @@
+id: ts_changepoints_regimes
+version: 1
+title: Changepoints, Regime Shifts, and Structural Breaks
+description: Detect and model level shifts, trend breaks, and regime switching in a Bayesian framework.
+bloom: create
+difficulty: 5
+est_minutes: 55
+assessment_stems:
+- Fit a model with an unknown changepoint location and report the posterior over the changepoint.
+- Contrast an explicit changepoint model with a state space model whose state noise is large.
+- Explain the forecasting risk of fitting a break that is really noise.
+tags:
+- ts

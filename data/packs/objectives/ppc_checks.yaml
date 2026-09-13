@@ -1,0 +1,14 @@
+id: ppc_checks
+version: 1
+title: Posterior Predictive Checking and Test Quantities
+description: Design test quantities that would expose the specific failures that matter, and read PPC
+  plots.
+bloom: evaluate
+difficulty: 3
+est_minutes: 55
+assessment_stems:
+- Your model fits the mean but not the count of zeros. Choose a test quantity and show the misfit.
+- Explain a Bayesian p-value for a test quantity and why values near 0.5 are not proof of a good model.
+- Design three test quantities for a sales forecasting model, one per failure mode you fear.
+tags:
+- ppc

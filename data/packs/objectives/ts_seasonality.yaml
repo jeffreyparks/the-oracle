@@ -1,0 +1,13 @@
+id: ts_seasonality
+version: 1
+title: 'Seasonality: Dummy, Fourier, and Time-Varying Seasonal Effects'
+description: Represent single and multiple seasonalities and allow seasonal patterns to evolve.
+bloom: apply
+difficulty: 3
+est_minutes: 55
+assessment_stems:
+- Model weekly and yearly seasonality with Fourier terms and choose the number of harmonics.
+- Contrast a fixed seasonal dummy set with a time-varying seasonal state; when is each right?
+- Handle a series with holidays that move each year, and state the modeling choice.
+tags:
+- ts

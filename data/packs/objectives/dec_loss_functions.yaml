@@ -1,0 +1,14 @@
+id: dec_loss_functions
+version: 1
+title: 'Decision Theory: Loss Functions and Optimal Actions'
+description: Choose actions that minimize expected posterior loss instead of reporting point estimates.
+bloom: create
+difficulty: 4
+est_minutes: 55
+assessment_stems:
+- Under asymmetric loss (stockouts cost 5x overstock), derive the optimal order quantity from predictive
+  draws.
+- Show that the posterior mean, median, and mode are optimal under squared, absolute, and 0-1 loss.
+- A threshold decision uses P(effect > 0) > 0.95. Restate the implied loss function.
+tags:
+- dec

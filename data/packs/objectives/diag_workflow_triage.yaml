@@ -1,0 +1,13 @@
+id: diag_workflow_triage
+version: 1
+title: 'Diagnostic Triage: A Decision Procedure'
+description: Apply an ordered checklist that turns sampler warnings into concrete model or code changes.
+bloom: create
+difficulty: 4
+est_minutes: 50
+assessment_stems:
+- Write your own triage flowchart from warnings to actions and defend the ordering.
+- A model has high R-hat, low ESS, and divergences at once. What do you fix first and why?
+- Distinguish a computation problem from a model problem given only diagnostic output.
+tags:
+- diag

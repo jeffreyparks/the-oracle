@@ -1,0 +1,15 @@
+id: ts_hierarchical_forecasting
+version: 1
+title: Hierarchical and Grouped Forecasting with Reconciliation
+description: Forecast many related series with shared structure and reconcile forecasts across an aggregation
+  hierarchy.
+bloom: create
+difficulty: 5
+est_minutes: 60
+assessment_stems:
+- Forecast store-level sales and reconcile them to regional and national totals; explain the coherence
+  constraint.
+- Show how partial pooling across series improves forecasts for short-history series.
+- Contrast bottom-up, top-down, and optimal reconciliation and state when each wins.
+tags:
+- ts

@@ -1,0 +1,14 @@
+id: gen_model_writing
+version: 1
+title: Writing a Generative Model
+description: Express a scientific question as a full generative model in statistical notation and in PPL
+  code.
+bloom: create
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Write the full generative model, in math and code, for test scores nested in schools.
+- Given PPL code, back-translate it into complete statistical notation including all priors.
+- Simulate a dataset from your own model, then recover the known parameters and report bias.
+tags:
+- gen

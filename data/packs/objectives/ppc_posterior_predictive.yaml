@@ -1,0 +1,15 @@
+id: ppc_posterior_predictive
+version: 1
+title: The Posterior Predictive Distribution
+description: Define and simulate the posterior predictive distribution and distinguish it from the posterior
+  of a parameter.
+bloom: apply
+difficulty: 3
+est_minutes: 50
+assessment_stems:
+- Simulate posterior predictive draws for a Poisson model and explain why they are wider than the posterior
+  mean's spread.
+- State the integral that defines the posterior predictive and what is being marginalized out.
+- A stakeholder wants 'the interval for the next observation.' Which distribution do you use and why?
+tags:
+- ppc

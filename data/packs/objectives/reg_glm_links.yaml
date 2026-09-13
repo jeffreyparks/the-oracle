@@ -1,0 +1,14 @@
+id: reg_glm_links
+version: 1
+title: Generalized Linear Models and Link Functions
+description: Build logistic, Poisson, and negative binomial regressions and interpret parameters on the
+  correct scale.
+bloom: apply
+difficulty: 3
+est_minutes: 65
+assessment_stems:
+- Interpret a logistic coefficient of 0.7 as an odds ratio and as a probability change at two baselines.
+- Add an exposure offset to a Poisson model and explain why it is not a coefficient.
+- Data are overdispersed counts. Move from Poisson to negative binomial and show the effect on intervals.
+tags:
+- reg

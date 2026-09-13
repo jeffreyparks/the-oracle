@@ -1,0 +1,14 @@
+id: prior_elicitation
+version: 1
+title: Prior Elicitation and Scale Setting
+description: Turn domain knowledge and units into concrete prior distributions with defensible scales.
+bloom: create
+difficulty: 3
+est_minutes: 55
+assessment_stems:
+- An expert says the effect is 'almost surely under 10 points.' Turn that into a prior and state the implied
+  tail probability.
+- Standardize predictors and set slope priors; explain how the priors change if you un-standardize.
+- Elicit a prior for a positive scale parameter and defend Half-Normal vs Exponential vs Half-Cauchy.
+tags:
+- prior

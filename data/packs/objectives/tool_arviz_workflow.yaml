@@ -1,0 +1,13 @@
+id: tool_arviz_workflow
+version: 1
+title: 'Tooling: ArviZ and InferenceData for Diagnostics and Plots'
+description: Use ArviZ InferenceData to store, diagnose, compare, and visualize Bayesian model output.
+bloom: apply
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- Build an InferenceData with posterior, prior, log_likelihood, and posterior_predictive groups.
+- Produce a trace plot, rank plot, and forest plot for one model and say what each rules out.
+- Use ArviZ to compare two models and read the output table correctly.
+tags:
+- tool

@@ -1,0 +1,13 @@
+id: prior_sensitivity
+version: 1
+title: Prior Sensitivity Analysis
+description: Quantify how much conclusions move when the prior is changed, and report it honestly.
+bloom: evaluate
+difficulty: 3
+est_minutes: 50
+assessment_stems:
+- Refit a model under three priors and tabulate how the key posterior quantity shifts.
+- With n = 10,000, why does the prior usually stop mattering, and when does it still matter?
+- Show a case where prior sensitivity is high precisely because the data are weakly identifying.
+tags:
+- prior

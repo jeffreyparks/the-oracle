@@ -1,0 +1,13 @@
+id: mcmc_reparameterization
+version: 1
+title: 'Reparameterization: Centered vs Non-Centered'
+description: Recognize funnel geometry and reparameterize a model to make the posterior easier to sample.
+bloom: create
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Rewrite a centered hierarchical model in non-centered form and show the divergence count drop.
+- Plot the funnel for a small group-count model and explain why small tau causes divergences.
+- When is the centered parameterization actually the better choice?
+tags:
+- mcmc

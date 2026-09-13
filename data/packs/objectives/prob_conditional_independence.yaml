@@ -1,0 +1,13 @@
+id: prob_conditional_independence
+version: 1
+title: Conditional Probability and Independence
+description: Compute conditional probabilities and distinguish independence from conditional independence.
+bloom: apply
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- Two events are independent but not conditionally independent given C. Construct such a case.
+- From a 2x2 contingency table, compute P(disease | positive test) and interpret it.
+- Explain why 'A and B are independent' does not imply 'A and B are independent given C'.
+tags:
+- prob

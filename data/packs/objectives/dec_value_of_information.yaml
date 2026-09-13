@@ -1,0 +1,14 @@
+id: dec_value_of_information
+version: 1
+title: Value of Information and Deciding What to Measure
+description: Estimate how much a decision would improve with more data, and decide whether to collect
+  it.
+bloom: evaluate
+difficulty: 5
+est_minutes: 45
+assessment_stems:
+- Compute the expected value of perfect information for a two-option decision from posterior draws.
+- Design a Bayesian sample-size or stopping analysis based on decision quality, not power.
+- Argue why more data is sometimes not worth its cost, with numbers.
+tags:
+- dec

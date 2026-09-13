@@ -1,0 +1,13 @@
+id: ts_intermittent_counts
+version: 1
+title: Intermittent Demand, Counts, and Zero Inflation
+description: Forecast sparse, zero-heavy, or count-valued series with appropriate likelihoods.
+bloom: apply
+difficulty: 4
+est_minutes: 45
+assessment_stems:
+- Model a series that is zero on 70% of days and justify the likelihood choice.
+- Explain why a Normal forecast interval is wrong for low counts, with a numeric example.
+- Distinguish structural zeros from sampling zeros in a demand series.
+tags:
+- ts

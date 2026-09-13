@@ -1,0 +1,14 @@
+id: workflow_bayesian_end_to_end
+version: 1
+title: The Bayesian Workflow End to End
+description: 'Run the full loop: model, prior check, fit, diagnose, posterior check, compare, expand,
+  decide, document.'
+bloom: create
+difficulty: 5
+est_minutes: 90
+assessment_stems:
+- Take a raw dataset to a documented decision, showing every workflow stage and each decision you made.
+- Given a colleague's notebook, audit which workflow stages are missing and what risk each omission creates.
+- Describe how you would version models and results so a fit from six months ago is reproducible.
+tags:
+- workflow

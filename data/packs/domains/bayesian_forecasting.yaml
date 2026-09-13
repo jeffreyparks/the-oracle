@@ -1,0 +1,651 @@
+id: bayesian_forecasting
+version: 1
+title: Bayesian Modeling and Forecasting
+description: A prerequisite DAG from probability foundations to production-grade probabilistic forecasting,
+  with a deliberate bias toward time series, forecast evaluation, and decisions.
+objectives:
+- id: prob_sample_space_events
+  version: 1
+- id: prob_conditional_independence
+  version: 1
+- id: prob_random_variables
+  version: 1
+- id: prob_expectation_variance
+  version: 1
+- id: prob_common_distributions
+  version: 1
+- id: prob_joint_marginal_transform
+  version: 1
+- id: prob_mc_integration
+  version: 1
+- id: tool_python_prob_stack
+  version: 1
+- id: bayes_theorem
+  version: 1
+- id: bayes_likelihood_function
+  version: 1
+- id: bayes_conjugacy
+  version: 1
+- id: bayes_sequential_updating
+  version: 1
+- id: bayes_credible_vs_confidence
+  version: 1
+- id: bayes_posterior_summaries
+  version: 1
+- id: prior_types
+  version: 1
+- id: prior_elicitation
+  version: 1
+- id: prior_predictive_checks
+  version: 1
+- id: prior_sensitivity
+  version: 1
+- id: gen_model_writing
+  version: 1
+- id: gen_sbc_fake_data
+  version: 1
+- id: mcmc_why_sampling
+  version: 1
+- id: mcmc_markov_chains
+  version: 1
+- id: mcmc_metropolis
+  version: 1
+- id: mcmc_hmc_nuts
+  version: 1
+- id: mcmc_reparameterization
+  version: 1
+- id: vi_basics
+  version: 1
+- id: vi_advi_practice
+  version: 1
+- id: tool_ppl_fitting
+  version: 1
+- id: tool_arviz_workflow
+  version: 1
+- id: diag_trace_convergence
+  version: 1
+- id: diag_rhat
+  version: 1
+- id: diag_ess_mcse
+  version: 1
+- id: diag_divergences
+  version: 1
+- id: diag_workflow_triage
+  version: 1
+- id: ppc_posterior_predictive
+  version: 1
+- id: ppc_checks
+  version: 1
+- id: ppc_residuals_misfit
+  version: 1
+- id: cmp_predictive_view
+  version: 1
+- id: cmp_waic_loo
+  version: 1
+- id: cmp_bayes_factors
+  version: 1
+- id: cmp_stacking_averaging
+  version: 1
+- id: reg_linear_bayesian
+  version: 1
+- id: reg_glm_links
+  version: 1
+- id: reg_robust_outliers
+  version: 1
+- id: reg_interactions_nonlinearity
+  version: 1
+- id: reg_splines_gams
+  version: 1
+- id: reg_measurement_missing
+  version: 1
+- id: hier_partial_pooling
+  version: 1
+- id: hier_varying_intercepts_slopes
+  version: 1
+- id: hier_group_predictors
+  version: 1
+- id: hier_nonnested_multilevel
+  version: 1
+- id: ts_foundations
+  version: 1
+- id: ts_ar_arima
+  version: 1
+- id: ts_local_level_trend
+  version: 1
+- id: ts_seasonality
+  version: 1
+- id: ts_structural_bsts
+  version: 1
+- id: ts_gaussian_processes
+  version: 1
+- id: ts_hierarchical_forecasting
+  version: 1
+- id: ts_forecast_uncertainty
+  version: 1
+- id: ts_backtesting
+  version: 1
+- id: ts_scoring_rules
+  version: 1
+- id: ts_calibration_sharpness
+  version: 1
+- id: ts_intermittent_counts
+  version: 1
+- id: ts_changepoints_regimes
+  version: 1
+- id: dec_loss_functions
+  version: 1
+- id: dec_value_of_information
+  version: 1
+- id: dec_causal_cautions
+  version: 1
+- id: dec_communication
+  version: 1
+- id: workflow_bayesian_end_to_end
+  version: 1
+- id: forecast_capstone
+  version: 1
+edges:
+- from: prob_sample_space_events
+  to: prob_conditional_independence
+- from: prob_sample_space_events
+  to: prob_random_variables
+- from: prob_random_variables
+  to: prob_expectation_variance
+- from: prob_random_variables
+  to: prob_common_distributions
+- from: prob_expectation_variance
+  to: prob_common_distributions
+- from: prob_expectation_variance
+  to: prob_joint_marginal_transform
+- from: prob_common_distributions
+  to: prob_joint_marginal_transform
+- from: prob_expectation_variance
+  to: prob_mc_integration
+- from: prob_mc_integration
+  to: tool_python_prob_stack
+- from: prob_conditional_independence
+  to: bayes_theorem
+- from: prob_common_distributions
+  to: bayes_theorem
+- from: bayes_theorem
+  to: bayes_likelihood_function
+- from: bayes_likelihood_function
+  to: bayes_conjugacy
+- from: prob_joint_marginal_transform
+  to: bayes_conjugacy
+- from: bayes_conjugacy
+  to: bayes_sequential_updating
+- from: bayes_conjugacy
+  to: bayes_credible_vs_confidence
+- from: prob_mc_integration
+  to: bayes_credible_vs_confidence
+- from: bayes_credible_vs_confidence
+  to: bayes_posterior_summaries
+- from: bayes_conjugacy
+  to: prior_types
+- from: prior_types
+  to: prior_elicitation
+- from: prior_elicitation
+  to: prior_predictive_checks
+- from: prob_mc_integration
+  to: prior_predictive_checks
+- from: tool_python_prob_stack
+  to: prior_predictive_checks
+- from: prior_predictive_checks
+  to: prior_sensitivity
+- from: bayes_posterior_summaries
+  to: prior_sensitivity
+- from: bayes_likelihood_function
+  to: gen_model_writing
+- from: prior_elicitation
+  to: gen_model_writing
+- from: tool_python_prob_stack
+  to: gen_model_writing
+- from: gen_model_writing
+  to: gen_sbc_fake_data
+- from: prior_predictive_checks
+  to: gen_sbc_fake_data
+- from: bayes_conjugacy
+  to: mcmc_why_sampling
+- from: prob_mc_integration
+  to: mcmc_why_sampling
+- from: mcmc_why_sampling
+  to: mcmc_markov_chains
+- from: mcmc_markov_chains
+  to: mcmc_metropolis
+- from: tool_python_prob_stack
+  to: mcmc_metropolis
+- from: mcmc_metropolis
+  to: mcmc_hmc_nuts
+- from: prob_joint_marginal_transform
+  to: mcmc_hmc_nuts
+- from: mcmc_hmc_nuts
+  to: mcmc_reparameterization
+- from: hier_partial_pooling
+  to: mcmc_reparameterization
+- from: mcmc_why_sampling
+  to: vi_basics
+- from: prob_joint_marginal_transform
+  to: vi_basics
+- from: vi_basics
+  to: vi_advi_practice
+- from: tool_ppl_fitting
+  to: vi_advi_practice
+- from: gen_model_writing
+  to: tool_ppl_fitting
+- from: mcmc_hmc_nuts
+  to: tool_ppl_fitting
+- from: tool_ppl_fitting
+  to: tool_arviz_workflow
+- from: tool_arviz_workflow
+  to: diag_trace_convergence
+- from: mcmc_markov_chains
+  to: diag_trace_convergence
+- from: diag_trace_convergence
+  to: diag_rhat
+- from: diag_rhat
+  to: diag_ess_mcse
+- from: prob_mc_integration
+  to: diag_ess_mcse
+- from: mcmc_hmc_nuts
+  to: diag_divergences
+- from: diag_ess_mcse
+  to: diag_divergences
+- from: diag_divergences
+  to: diag_workflow_triage
+- from: mcmc_reparameterization
+  to: diag_workflow_triage
+- from: gen_sbc_fake_data
+  to: diag_workflow_triage
+- from: bayes_posterior_summaries
+  to: ppc_posterior_predictive
+- from: prob_mc_integration
+  to: ppc_posterior_predictive
+- from: tool_arviz_workflow
+  to: ppc_posterior_predictive
+- from: ppc_posterior_predictive
+  to: ppc_checks
+- from: ppc_checks
+  to: ppc_residuals_misfit
+- from: ppc_checks
+  to: cmp_predictive_view
+- from: cmp_predictive_view
+  to: cmp_waic_loo
+- from: tool_arviz_workflow
+  to: cmp_waic_loo
+- from: prior_sensitivity
+  to: cmp_bayes_factors
+- from: cmp_waic_loo
+  to: cmp_bayes_factors
+- from: cmp_waic_loo
+  to: cmp_stacking_averaging
+- from: gen_model_writing
+  to: reg_linear_bayesian
+- from: tool_ppl_fitting
+  to: reg_linear_bayesian
+- from: prior_elicitation
+  to: reg_linear_bayesian
+- from: reg_linear_bayesian
+  to: reg_glm_links
+- from: prob_common_distributions
+  to: reg_glm_links
+- from: reg_linear_bayesian
+  to: reg_robust_outliers
+- from: prob_common_distributions
+  to: reg_robust_outliers
+- from: reg_glm_links
+  to: reg_interactions_nonlinearity
+- from: reg_interactions_nonlinearity
+  to: reg_splines_gams
+- from: prior_elicitation
+  to: reg_splines_gams
+- from: reg_linear_bayesian
+  to: reg_measurement_missing
+- from: gen_model_writing
+  to: reg_measurement_missing
+- from: reg_linear_bayesian
+  to: hier_partial_pooling
+- from: bayes_sequential_updating
+  to: hier_partial_pooling
+- from: hier_partial_pooling
+  to: hier_varying_intercepts_slopes
+- from: tool_ppl_fitting
+  to: hier_varying_intercepts_slopes
+- from: hier_varying_intercepts_slopes
+  to: hier_group_predictors
+- from: hier_group_predictors
+  to: hier_nonnested_multilevel
+- from: diag_workflow_triage
+  to: hier_nonnested_multilevel
+- from: prob_expectation_variance
+  to: ts_foundations
+- from: reg_linear_bayesian
+  to: ts_foundations
+- from: ts_foundations
+  to: ts_ar_arima
+- from: tool_ppl_fitting
+  to: ts_ar_arima
+- from: ts_ar_arima
+  to: ts_local_level_trend
+- from: reg_measurement_missing
+  to: ts_local_level_trend
+- from: ts_local_level_trend
+  to: ts_seasonality
+- from: ts_seasonality
+  to: ts_structural_bsts
+- from: reg_glm_links
+  to: ts_structural_bsts
+- from: reg_splines_gams
+  to: ts_gaussian_processes
+- from: ts_seasonality
+  to: ts_gaussian_processes
+- from: hier_varying_intercepts_slopes
+  to: ts_hierarchical_forecasting
+- from: ts_structural_bsts
+  to: ts_hierarchical_forecasting
+- from: ppc_posterior_predictive
+  to: ts_forecast_uncertainty
+- from: ts_ar_arima
+  to: ts_forecast_uncertainty
+- from: ts_forecast_uncertainty
+  to: ts_backtesting
+- from: cmp_waic_loo
+  to: ts_backtesting
+- from: ts_backtesting
+  to: ts_scoring_rules
+- from: cmp_predictive_view
+  to: ts_scoring_rules
+- from: ts_scoring_rules
+  to: ts_calibration_sharpness
+- from: ts_structural_bsts
+  to: ts_intermittent_counts
+- from: reg_glm_links
+  to: ts_intermittent_counts
+- from: ts_local_level_trend
+  to: ts_changepoints_regimes
+- from: ppc_residuals_misfit
+  to: ts_changepoints_regimes
+- from: bayes_posterior_summaries
+  to: dec_loss_functions
+- from: ppc_posterior_predictive
+  to: dec_loss_functions
+- from: dec_loss_functions
+  to: dec_value_of_information
+- from: reg_interactions_nonlinearity
+  to: dec_causal_cautions
+- from: hier_group_predictors
+  to: dec_causal_cautions
+- from: bayes_posterior_summaries
+  to: dec_communication
+- from: ts_calibration_sharpness
+  to: dec_communication
+- from: diag_workflow_triage
+  to: workflow_bayesian_end_to_end
+- from: ppc_residuals_misfit
+  to: workflow_bayesian_end_to_end
+- from: cmp_stacking_averaging
+  to: workflow_bayesian_end_to_end
+- from: prior_sensitivity
+  to: workflow_bayesian_end_to_end
+- from: dec_communication
+  to: workflow_bayesian_end_to_end
+- from: ts_hierarchical_forecasting
+  to: forecast_capstone
+- from: ts_calibration_sharpness
+  to: forecast_capstone
+- from: ts_changepoints_regimes
+  to: forecast_capstone
+- from: ts_intermittent_counts
+  to: forecast_capstone
+- from: dec_value_of_information
+  to: forecast_capstone
+- from: workflow_bayesian_end_to_end
+  to: forecast_capstone
+modules:
+- id: m01_probability_foundations
+  title: Probability Foundations and the Simulation Mindset
+  goal: Build fluent probability language and the habit of answering questions by simulation, not formulas
+    alone.
+  objectives:
+  - prob_sample_space_events
+  - prob_conditional_independence
+  - prob_random_variables
+  - prob_expectation_variance
+  - prob_common_distributions
+  - prob_joint_marginal_transform
+  - prob_mc_integration
+  - tool_python_prob_stack
+- id: m02_bayes_core
+  title: Bayes' Theorem, Conjugacy, and Reading a Posterior
+  goal: Update beliefs correctly by hand, and report posteriors in language that answers the real question.
+  objectives:
+  - bayes_theorem
+  - bayes_likelihood_function
+  - bayes_conjugacy
+  - bayes_sequential_updating
+  - bayes_credible_vs_confidence
+  - bayes_posterior_summaries
+- id: m03_priors_generative
+  title: Priors, Generative Models, and Model Validation
+  goal: Choose defensible priors, write full generative models, and prove the implementation is correct
+    before trusting it.
+  objectives:
+  - prior_types
+  - prior_elicitation
+  - prior_predictive_checks
+  - prior_sensitivity
+  - gen_model_writing
+  - gen_sbc_fake_data
+- id: m04_computation
+  title: 'Computation: MCMC and Variational Inference'
+  goal: Understand and run the algorithms that make non-conjugate Bayesian inference possible.
+  objectives:
+  - mcmc_why_sampling
+  - mcmc_markov_chains
+  - mcmc_metropolis
+  - mcmc_hmc_nuts
+  - tool_ppl_fitting
+  - tool_arviz_workflow
+  - vi_basics
+  - vi_advi_practice
+- id: m05_diagnostics_ppc
+  title: Diagnostics and Posterior Predictive Checking
+  goal: Decide whether a fit is trustworthy, and whether the model can reproduce the features of the data
+    you care about.
+  objectives:
+  - diag_trace_convergence
+  - diag_rhat
+  - diag_ess_mcse
+  - diag_divergences
+  - ppc_posterior_predictive
+  - ppc_checks
+  - ppc_residuals_misfit
+- id: m06_regression
+  title: 'Bayesian Regression: GLMs, Robustness, and Smooths'
+  goal: Model a conditional mean honestly across outcome types, nonlinearity, outliers, and imperfect
+    data.
+  objectives:
+  - reg_linear_bayesian
+  - reg_glm_links
+  - reg_robust_outliers
+  - reg_interactions_nonlinearity
+  - reg_splines_gams
+  - reg_measurement_missing
+- id: m07_hierarchical
+  title: Hierarchical and Multilevel Models
+  goal: Share strength across groups, and fix the sampling geometry that hierarchical models create.
+  objectives:
+  - hier_partial_pooling
+  - mcmc_reparameterization
+  - diag_workflow_triage
+  - hier_varying_intercepts_slopes
+  - hier_group_predictors
+  - hier_nonnested_multilevel
+- id: m08_model_comparison
+  title: Model Comparison and Averaging
+  goal: Compare models on expected out-of-sample predictive accuracy, and combine them rather than over-trusting
+    one.
+  objectives:
+  - cmp_predictive_view
+  - cmp_waic_loo
+  - cmp_bayes_factors
+  - cmp_stacking_averaging
+- id: m09_time_series
+  title: Bayesian Time Series and Structural Forecasting
+  goal: Model time-dependent data with state space, seasonal, GP, and hierarchical structure, and produce
+    honest predictive distributions.
+  objectives:
+  - ts_foundations
+  - ts_ar_arima
+  - ts_local_level_trend
+  - ts_seasonality
+  - ts_structural_bsts
+  - ts_gaussian_processes
+  - ts_intermittent_counts
+  - ts_changepoints_regimes
+  - ts_hierarchical_forecasting
+  - ts_forecast_uncertainty
+- id: m10_evaluation_decisions
+  title: Forecast Evaluation, Decisions, and the Full Workflow
+  goal: Prove a forecast is good with proper scores and calibration, turn it into decisions, and run the
+    whole workflow end to end.
+  objectives:
+  - ts_backtesting
+  - ts_scoring_rules
+  - ts_calibration_sharpness
+  - dec_loss_functions
+  - dec_value_of_information
+  - dec_causal_cautions
+  - dec_communication
+  - workflow_bayesian_end_to_end
+  - forecast_capstone
+misconceptions:
+- id: mis_posterior_prob_of_data
+  wrong_model: The p-value and the posterior probability of the hypothesis are the same number; P(data|H)
+    can be read as P(H|data).
+  objectives:
+  - bayes_theorem
+  - bayes_likelihood_function
+  - bayes_credible_vs_confidence
+  diagnostic: A test is positive. Sensitivity is 99%. Prevalence is 0.1%. A student says 'so there is
+    a 99% chance the patient is sick.' What is the actual probability, and which conditional did the student
+    flip?
+- id: mis_flat_prior_is_neutral
+  wrong_model: A flat or very wide prior is 'objective' and adds no information.
+  objectives:
+  - prior_types
+  - prior_elicitation
+  - prior_predictive_checks
+  diagnostic: You put Uniform(-50, 50) on a logistic regression coefficient. Simulate the prior predictive.
+    What proportion of simulated outcome probabilities land within 0.05 of 0 or 1, and is that a neutral
+    belief?
+- id: mis_prior_swamped_always
+  wrong_model: With enough data the prior never matters, so prior choice is never worth arguing about.
+  objectives:
+  - prior_sensitivity
+  - hier_partial_pooling
+  - cmp_bayes_factors
+  diagnostic: You have 500,000 rows but 8 groups at the top hierarchical level, and a near-separated logistic
+    term. Name two parameters where the prior still drives the answer, and explain why n did not help.
+- id: mis_more_draws_fixes_bias
+  wrong_model: If the sampler shows problems, running more iterations will fix it.
+  objectives:
+  - diag_rhat
+  - diag_ess_mcse
+  - diag_divergences
+  - diag_workflow_triage
+  diagnostic: A run has R-hat 1.4 and 300 divergences. You rerun with 10x the draws and R-hat is still
+    1.35. What class of problem is this, and what is the correct next action?
+- id: mis_rhat_means_correct
+  wrong_model: R-hat near 1.00 and high ESS mean the model is correct.
+  objectives:
+  - diag_rhat
+  - ppc_checks
+  - cmp_predictive_view
+  diagnostic: A Normal model fitted to strictly positive, heavily skewed counts converges perfectly, with
+    R-hat 1.00 everywhere. What does convergence actually certify, and which check would expose the misfit?
+- id: mis_divergences_ignorable
+  wrong_model: A few divergences are a cosmetic sampler warning and can be ignored if the trace looks
+    fine.
+  objectives:
+  - diag_divergences
+  - mcmc_reparameterization
+  diagnostic: Your hierarchical model has 12 divergences, all with tau below 0.1. Plot tau against the
+    group effects. What region of the posterior is being missed, and how does that bias your group-level
+    sd estimate?
+- id: mis_posterior_vs_predictive
+  wrong_model: The credible interval for the mean is also the interval in which the next observation will
+    fall.
+  objectives:
+  - ppc_posterior_predictive
+  - ts_forecast_uncertainty
+  - dec_communication
+  diagnostic: Your posterior 95% interval for the mean daily sales is [98, 102]. What fraction of actual
+    days fall in that interval, and which distribution should you have quoted?
+- id: mis_plugin_forecast
+  wrong_model: Forecasting means plugging the posterior mean parameters into the model and projecting
+    forward.
+  objectives:
+  - ts_forecast_uncertainty
+  - ppc_posterior_predictive
+  - ts_calibration_sharpness
+  diagnostic: Compare 12-step forecast intervals from (a) plug-in posterior means and (b) full predictive
+    draws. Which is narrower, by roughly how much, and which source of uncertainty was dropped?
+- id: mis_loo_for_timeseries
+  wrong_model: LOO or k-fold cross-validation can be applied to time series the same way as to i.i.d.
+    data.
+  objectives:
+  - cmp_waic_loo
+  - ts_backtesting
+  diagnostic: You run standard PSIS-LOO on a daily series with strong autocorrelation and it prefers the
+    most flexible model. Explain the leakage, and design the evaluation scheme that replaces it.
+- id: mis_bayes_factor_equals_loo
+  wrong_model: Bayes factors and LOO answer the same question, so either can be used interchangeably.
+  objectives:
+  - cmp_bayes_factors
+  - cmp_waic_loo
+  - prior_sensitivity
+  diagnostic: Widen the prior on the tested coefficient by a factor of 10. Report the change in the Bayes
+    factor and the change in elpd_loo. Why does one move a lot and the other barely at all?
+- id: mis_shrinkage_is_cheating
+  wrong_model: Partial pooling distorts the data by pulling group estimates toward the mean, so no-pooling
+    estimates are more honest.
+  objectives:
+  - hier_partial_pooling
+  - hier_varying_intercepts_slopes
+  diagnostic: One store has 3 observations and a no-pooling mean of 0.95; the global mean is 0.40. Which
+    estimate has lower expected out-of-sample error next quarter, and why is 'honesty' the wrong criterion
+    here?
+- id: mis_accuracy_metric_is_enough
+  wrong_model: A good forecast is one with low MAE or MAPE; the interval is decoration.
+  objectives:
+  - ts_scoring_rules
+  - ts_calibration_sharpness
+  - dec_loss_functions
+  diagnostic: Two forecasters have identical MAE. One reports 95% intervals with 60% empirical coverage.
+    Rank them by CRPS and log score, and explain which business decision changes.
+- id: mis_regression_is_causal
+  wrong_model: A coefficient with a posterior far from zero shows that the predictor causes the outcome,
+    especially in a Bayesian model.
+  objectives:
+  - dec_causal_cautions
+  - reg_interactions_nonlinearity
+  - hier_group_predictors
+  diagnostic: Price has a positive posterior slope on sales, clearly excluding zero. List the causal assumptions
+    needed to act on it, and name one variable whose omission (or whose inclusion as a collider) would
+    flip the sign.
+- id: mis_control_for_everything
+  wrong_model: Adding more covariates always reduces bias, so control for everything available.
+  objectives:
+  - dec_causal_cautions
+  - reg_measurement_missing
+  diagnostic: Simulate X -> C <- Y and regress Y on X adjusting for C. Report the estimated X coefficient
+    with and without C, given that the true effect is zero. Why did adjustment create the bias?
+- id: mis_vi_equals_mcmc
+  wrong_model: Variational inference is just faster MCMC and gives the same posterior.
+  objectives:
+  - vi_basics
+  - vi_advi_practice
+  diagnostic: Fit a correlated 2D posterior with mean-field ADVI and with NUTS. Compare the posterior
+    sds and the correlation. Which is systematically wrong, in which direction, and why does the KL direction
+    cause it?

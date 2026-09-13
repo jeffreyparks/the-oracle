@@ -1,0 +1,14 @@
+id: bayes_sequential_updating
+version: 1
+title: Sequential Updating and Exchangeability
+description: Show that batch and sequential Bayesian updates agree, and explain exchangeability as the
+  modeling assumption behind i.i.d. likelihoods.
+bloom: analyze
+difficulty: 3
+est_minutes: 50
+assessment_stems:
+- Update a Beta prior one observation at a time and in one batch; prove numerically the posteriors match.
+- Give a dataset where exchangeability plainly fails and say what structure must be added.
+- State de Finetti's theorem informally and connect it to hierarchical models.
+tags:
+- bayes

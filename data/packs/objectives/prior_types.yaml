@@ -1,0 +1,14 @@
+id: prior_types
+version: 1
+title: 'Prior Types: Informative, Weakly Informative, and Flat'
+description: Distinguish informative, weakly informative, reference, and improper flat priors and say
+  when each is appropriate.
+bloom: understand
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- Why is a Uniform(-1e6, 1e6) prior on a log-odds not 'uninformative'? Show its implied prior on the probability.
+- Give a weakly informative prior for a regression slope on standardized data and justify the scale.
+- Name a case where an improper prior yields an improper posterior.
+tags:
+- prior

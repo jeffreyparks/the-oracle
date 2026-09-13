@@ -1,0 +1,13 @@
+id: hier_nonnested_multilevel
+version: 1
+title: Non-Nested, Crossed, and Deep Hierarchies
+description: Model crossed and multi-way grouping structures and know their computational cost.
+bloom: create
+difficulty: 5
+est_minutes: 55
+assessment_stems:
+- Specify a model with crossed product and region effects and describe the resulting design.
+- Why do deep hierarchies with few groups per level produce weakly identified variance components?
+- Give a rule of thumb for the minimum number of groups before a hierarchical level is worth it.
+tags:
+- hier

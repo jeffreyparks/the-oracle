@@ -1,0 +1,13 @@
+id: hier_group_predictors
+version: 1
+title: Group-Level Predictors and Cross-Level Interactions
+description: Add covariates at the group level and interpret cross-level interactions correctly.
+bloom: analyze
+difficulty: 4
+est_minutes: 50
+assessment_stems:
+- Add a school-level funding predictor to a student-level model and interpret its coefficient.
+- Explain why a group-level predictor reduces the group-level sd rather than the residual sd.
+- Distinguish within-group and between-group effects and show how to separate them by centering.
+tags:
+- hier

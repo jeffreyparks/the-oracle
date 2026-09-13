@@ -1,0 +1,14 @@
+id: dec_causal_cautions
+version: 1
+title: 'Causal Cautions: Confounding, Colliders, and Bayesian Humility'
+description: Recognize that Bayesian machinery does not make an observational estimate causal, and use
+  DAG reasoning to pick adjustments.
+bloom: analyze
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Draw a DAG where adjusting for a collider creates bias, and show the effect in simulation.
+- A stakeholder reads a posterior slope as 'the effect of price on sales.' List the assumptions required.
+- Explain why adding every available covariate is not a safe default.
+tags:
+- dec

@@ -1,0 +1,14 @@
+id: gen_sbc_fake_data
+version: 1
+title: Simulation-Based Calibration and Fake-Data Recovery
+description: Validate a model implementation by recovering known parameters and checking rank uniformity.
+bloom: evaluate
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Run simulation-based calibration on a hierarchical model and interpret the rank histogram.
+- Your fake-data recovery is biased for one parameter only. List three candidate causes and how to test
+  each.
+- Why does fake-data recovery test the code and the model but not the world?
+tags:
+- gen

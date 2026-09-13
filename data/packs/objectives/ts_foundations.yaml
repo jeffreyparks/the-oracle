@@ -1,0 +1,13 @@
+id: ts_foundations
+version: 1
+title: 'Time Series Foundations: Stationarity, ACF, and Decomposition'
+description: Diagnose trend, seasonality, and autocorrelation, and explain stationarity and differencing.
+bloom: analyze
+difficulty: 2
+est_minutes: 55
+assessment_stems:
+- Given an ACF and PACF plot, propose an AR or MA order and justify it.
+- Explain why a random walk is non-stationary and what differencing does to its variance.
+- Decompose a series into trend, seasonal, and remainder and state what the remainder should look like.
+tags:
+- ts

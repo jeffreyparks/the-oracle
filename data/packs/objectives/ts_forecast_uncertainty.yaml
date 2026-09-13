@@ -1,0 +1,13 @@
+id: ts_forecast_uncertainty
+version: 1
+title: Forecast Distributions and Uncertainty Propagation
+description: Produce multi-step-ahead predictive distributions that propagate parameter and process uncertainty.
+bloom: analyze
+difficulty: 4
+est_minutes: 50
+assessment_stems:
+- Generate 12-step-ahead predictive draws and explain each source contributing to the widening fan.
+- Show why plugging in posterior mean parameters understates forecast uncertainty.
+- Compute the predictive distribution of a cumulative 12-month total, not just each month.
+tags:
+- ts

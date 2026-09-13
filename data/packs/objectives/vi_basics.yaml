@@ -1,0 +1,13 @@
+id: vi_basics
+version: 1
+title: 'Variational Inference: ELBO and Mean-Field'
+description: Explain VI as optimization of the ELBO and state what mean-field approximations distort.
+bloom: analyze
+difficulty: 4
+est_minutes: 60
+assessment_stems:
+- Derive the ELBO from the KL divergence and say which direction of KL is being minimized.
+- Explain why mean-field VI typically underestimates posterior variance; illustrate on a correlated Normal.
+- Given a 2M-row dataset with a deadline, argue for or against VI over NUTS.
+tags:
+- vi

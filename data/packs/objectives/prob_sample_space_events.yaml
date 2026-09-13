@@ -1,0 +1,13 @@
+id: prob_sample_space_events
+version: 1
+title: Sample Spaces, Events, and Probability Axioms
+description: State the Kolmogorov axioms and use them to compute probabilities of compound events.
+bloom: understand
+difficulty: 1
+est_minutes: 40
+assessment_stems:
+- Given a two-dice experiment, write the sample space and compute P(sum is prime).
+- A student claims P(A or B) = P(A) + P(B) for any A, B. Give a counterexample and the correct rule.
+- Show that P(A^c) = 1 - P(A) follows from the axioms.
+tags:
+- prob

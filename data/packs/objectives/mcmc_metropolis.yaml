@@ -1,0 +1,13 @@
+id: mcmc_metropolis
+version: 1
+title: Metropolis-Hastings from Scratch
+description: Implement Metropolis-Hastings, tune the proposal, and explain the acceptance ratio.
+bloom: apply
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Code a random-walk Metropolis sampler for a Beta-Binomial posterior and compare to the closed form.
+- Your acceptance rate is 2%. Diagnose the cause and fix it; then explain why 99% is also bad.
+- Show why the proposal density cancels when the proposal is symmetric.
+tags:
+- mcmc

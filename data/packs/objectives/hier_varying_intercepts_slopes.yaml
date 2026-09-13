@@ -1,0 +1,14 @@
+id: hier_varying_intercepts_slopes
+version: 1
+title: Varying Intercepts and Varying Slopes
+description: Build multilevel models with group-varying intercepts and slopes and a correlation structure
+  between them.
+bloom: create
+difficulty: 4
+est_minutes: 65
+assessment_stems:
+- Fit a varying-intercept, varying-slope model and interpret the intercept-slope correlation posterior.
+- Choose an LKJ prior for the correlation matrix and justify the eta value.
+- Explain what the group-level sd posterior being near zero implies.
+tags:
+- hier

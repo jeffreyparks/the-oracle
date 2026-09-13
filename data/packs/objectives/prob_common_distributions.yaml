@@ -1,0 +1,15 @@
+id: prob_common_distributions
+version: 1
+title: The Common Distribution Families and Their Stories
+description: Match Bernoulli, Binomial, Poisson, Negative Binomial, Normal, Student-t, Beta, Gamma, and
+  Dirichlet to the data-generating stories they encode.
+bloom: analyze
+difficulty: 2
+est_minutes: 60
+assessment_stems:
+- Counts of website errors per hour are overdispersed relative to Poisson. Name a better family and justify
+  it from its story.
+- Why is the Beta the natural family for an unknown proportion, and the Gamma for an unknown rate?
+- Given four datasets, assign a likelihood family to each and defend the choice in one sentence.
+tags:
+- prob

@@ -1,0 +1,16 @@
+id: forecast_capstone
+version: 1
+title: 'Capstone: Production-Grade Probabilistic Forecast'
+description: Deliver a backtested, calibrated, hierarchical forecasting system with a decision layer and
+  monitoring.
+bloom: create
+difficulty: 5
+est_minutes: 180
+assessment_stems:
+- Build, backtest, and calibrate a multi-series forecast, then defend every modeling choice against a
+  named alternative.
+- Define a monitoring plan that detects forecast degradation before the business does.
+- 'Present the system to a skeptical executive: what you know, what you do not, and what you would do
+  next.'
+tags:
+- forecast

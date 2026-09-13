@@ -1,0 +1,13 @@
+id: reg_measurement_missing
+version: 1
+title: Measurement Error and Missing Data
+description: Model measurement error and missingness generatively instead of deleting or imputing naively.
+bloom: create
+difficulty: 4
+est_minutes: 55
+assessment_stems:
+- Write a model where a predictor is observed with known error and show the effect on the slope posterior.
+- Contrast MCAR, MAR, and MNAR and say which one complete-case analysis needs.
+- Explain why Bayesian imputation of a missing outcome is just marginalization.
+tags:
+- reg

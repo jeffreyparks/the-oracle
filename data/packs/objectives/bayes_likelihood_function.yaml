@@ -1,0 +1,15 @@
+id: bayes_likelihood_function
+version: 1
+title: The Likelihood Function and Its Interpretation
+description: Write a likelihood for an i.i.d. sample and explain why it is a function of parameters, not
+  a probability over them.
+bloom: understand
+difficulty: 2
+est_minutes: 45
+assessment_stems:
+- Write the log-likelihood for n Bernoulli trials and find its maximizer.
+- A student says 'the likelihood of theta = 0.5 is 0.03, so there is a 3% chance theta is 0.5.' Correct
+  them.
+- Explain why the likelihood need only be specified up to a constant in theta.
+tags:
+- bayes

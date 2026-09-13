@@ -1,0 +1,13 @@
+id: ts_backtesting
+version: 1
+title: 'Backtesting: Rolling Origin and Time Series Cross-Validation'
+description: Evaluate forecasts with rolling-origin or expanding-window schemes that respect time order.
+bloom: evaluate
+difficulty: 4
+est_minutes: 55
+assessment_stems:
+- Design a rolling-origin backtest for a daily series with weekly seasonality and a 14-day horizon.
+- Explain a concrete leakage path in a naive k-fold split of a time series.
+- Report scores by horizon and explain why an average over horizons can mislead.
+tags:
+- ts

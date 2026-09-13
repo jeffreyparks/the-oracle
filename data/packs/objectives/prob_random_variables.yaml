@@ -1,0 +1,13 @@
+id: prob_random_variables
+version: 1
+title: Random Variables, PMFs, PDFs, and CDFs
+description: Distinguish discrete and continuous random variables and move between pmf/pdf, CDF, and quantiles.
+bloom: understand
+difficulty: 2
+est_minutes: 50
+assessment_stems:
+- Given a pdf f(x) = cx on [0,2], find c, the CDF, and the median.
+- Explain why a pdf value may exceed 1 but a pmf value may not.
+- Sketch the CDF of a mixture of a point mass at 0 and a Normal, and name where it is discontinuous.
+tags:
+- prob

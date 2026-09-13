@@ -1,0 +1,13 @@
+id: bayes_conjugacy
+version: 1
+title: Conjugate Priors and Closed-Form Updating
+description: Derive and apply Beta-Binomial, Gamma-Poisson, and Normal-Normal conjugate updates.
+bloom: apply
+difficulty: 3
+est_minutes: 60
+assessment_stems:
+- Starting from Beta(2,2) and observing 7 successes in 10 trials, give the posterior and its 90% interval.
+- Derive the Normal-Normal posterior mean as a precision-weighted average of prior mean and data mean.
+- Show how a Gamma-Poisson posterior behaves as exposure time grows without bound.
+tags:
+- bayes

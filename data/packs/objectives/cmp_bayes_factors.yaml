@@ -1,0 +1,13 @@
+id: cmp_bayes_factors
+version: 1
+title: Marginal Likelihood, Bayes Factors, and Their Hazards
+description: Compute and interpret Bayes factors while recognizing their extreme prior sensitivity.
+bloom: evaluate
+difficulty: 4
+est_minutes: 55
+assessment_stems:
+- Show numerically how widening a prior by 10x changes a Bayes factor but barely changes the posterior.
+- Explain the Jeffreys-Lindley paradox in one paragraph with a concrete example.
+- When is a Bayes factor the right tool, and when is LOO the right tool?
+tags:
+- cmp

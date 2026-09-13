@@ -1,0 +1,14 @@
+id: ts_gaussian_processes
+version: 1
+title: Gaussian Processes for Time Series
+description: Use GP priors with interpretable kernels to model smooth trends, periodicity, and uncertainty
+  growth.
+bloom: create
+difficulty: 5
+est_minutes: 70
+assessment_stems:
+- Compose a kernel for a smooth trend plus yearly periodicity and describe each hyperparameter's role.
+- Explain why a GP's forecast uncertainty reverts toward the prior far from data.
+- Given O(n^3) cost, name two approximations and their assumptions.
+tags:
+- ts

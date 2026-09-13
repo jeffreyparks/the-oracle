@@ -1,0 +1,13 @@
+id: reg_interactions_nonlinearity
+version: 1
+title: Interactions, Polynomials, and Nonlinear Effects
+description: Model nonlinearity and effect modification, and interpret them via marginal effects.
+bloom: analyze
+difficulty: 3
+est_minutes: 50
+assessment_stems:
+- Interpret an interaction term in a logistic model at three covariate values using predicted probabilities.
+- Explain why a polynomial fit extrapolates dangerously, and show it on held-out range.
+- Compute and plot an average marginal effect from posterior draws.
+tags:
+- reg

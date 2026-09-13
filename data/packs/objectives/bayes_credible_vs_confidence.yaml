@@ -1,0 +1,15 @@
+id: bayes_credible_vs_confidence
+version: 1
+title: Credible Intervals vs Confidence Intervals
+description: Contrast Bayesian credible intervals (HDI, equal-tailed) with frequentist confidence intervals
+  in coverage meaning.
+bloom: analyze
+difficulty: 3
+est_minutes: 45
+assessment_stems:
+- Compute both an HDI and an equal-tailed interval for a skewed posterior and explain when they differ.
+- A colleague says 'the 95% CI means there is 95% probability the parameter is inside.' When is that true
+  and when not?
+- Design a simulation showing a credible interval's frequentist coverage under a misspecified prior.
+tags:
+- bayes

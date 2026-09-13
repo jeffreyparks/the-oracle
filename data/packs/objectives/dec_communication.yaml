@@ -1,0 +1,14 @@
+id: dec_communication
+version: 1
+title: Communicating Uncertainty to Decision Makers
+description: Present posterior and predictive uncertainty in ways non-statisticians can act on.
+bloom: create
+difficulty: 3
+est_minutes: 40
+assessment_stems:
+- Rewrite a fan-chart forecast as three sentences an operations manager can act on.
+- Choose between a fan chart, a set of scenario draws, and a probability table for one audience; defend
+  it.
+- Identify three ways a 95% interval is routinely misread and how your visual prevents each.
+tags:
+- dec

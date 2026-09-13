@@ -1,0 +1,13 @@
+id: cmp_stacking_averaging
+version: 1
+title: Model Averaging, Stacking, and Ensembles
+description: Combine models by stacking or pseudo-BMA weights instead of picking a single winner.
+bloom: create
+difficulty: 4
+est_minutes: 50
+assessment_stems:
+- Compute stacking weights for three candidate forecasting models and interpret a zero weight.
+- Contrast stacking with Bayesian model averaging under an open-world assumption.
+- Show a case where an averaged forecast beats every individual model on log score.
+tags:
+- cmp
