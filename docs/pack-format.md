@@ -84,8 +84,10 @@ def all_objectives() -> Iterator[Objective]: ...
 def search(text: str, limit: int = 20) -> list[Objective]: ...
 ```
 
-`Domain` exposes resolved helpers:
+`Domain` exposes resolved helpers. `load_domain` calls `bind()` for you; call it
+yourself only when constructing a `Domain` by hand:
 ```python
+domain.bind(resolved: dict[str, Objective]) -> Domain   # attach library bodies
 domain.objective(objective_id) -> Objective       # library-resolved, version-pinned
 domain.prerequisites(objective_id) -> list[str]
 domain.teaching_order() -> list[str]              # topologically valid
