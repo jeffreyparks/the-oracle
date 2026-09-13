@@ -1,0 +1,68 @@
+{
+  "entries": {
+    "4c6d4436d2e68e67f5b56e874ff70cc1": {
+      "agent": "grader",
+      "output": {
+        "confidence": 0.7,
+        "correct": false,
+        "feedback": "That is wrong. It does not reach the point the item asks for.",
+        "misconception_id": null,
+        "reasoning": "Answer does not match the expected response or any known wrong model."
+      },
+      "prompt": "item_id: item-fixed-0001\nobjective_id: bayes_theorem\nkind: short\nstem: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\nexpected answer: A correct, complete response to: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\nknown misconceptions:\n- mis_posterior_prob_of_data: The p-value and the posterior probability of the hypothesis are the same number; P(data|H) can be read as P(H|data).\n\nlearner answer:\nno idea",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    },
+    "7d6364e993008843a9bea9c0e0ace36e": {
+      "agent": "item_writer",
+      "output": {
+        "bloom": "understand",
+        "difficulty": 2,
+        "expected": "A correct, complete response to: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.",
+        "id": "item-c6f4be9a609c",
+        "kind": "short",
+        "misconception_probes": [],
+        "objective_id": "bayes_theorem",
+        "stem": "A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise."
+      },
+      "prompt": "objective_id: bayes_theorem\nbloom: understand\ndifficulty: 2 (1 easiest, 5 hardest)\nitem kind: short\nassessment stems to draw on:\n- A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\n- Label prior, likelihood, and normalizing constant in a written-out posterior, and say which one does not affect the shape.\n- Show algebraically why the posterior is unchanged if the likelihood is multiplied by a constant.\n\nWrite exactly one item. Set objective_id, bloom and difficulty to the values above. Set kind to the item kind above.",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    },
+    "9f8a3ac95386c29a2c90965a33ea242b": {
+      "agent": "grader",
+      "output": {
+        "confidence": 0.8,
+        "correct": false,
+        "feedback": "That is wrong, and it is wrong in a specific way: you are using the model behind mis_posterior_prob_of_data. Fix that model first.",
+        "misconception_id": "mis_posterior_prob_of_data",
+        "reasoning": "Answer restates the wrong model recorded as mis_posterior_prob_of_data."
+      },
+      "prompt": "item_id: item-fixed-0001\nobjective_id: bayes_theorem\nkind: short\nstem: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\nexpected answer: A correct, complete response to: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\nknown misconceptions:\n- mis_posterior_prob_of_data: The p-value and the posterior probability of the hypothesis are the same number; P(data|H) can be read as P(H|data).\n\nlearner answer:\nThe p-value and the posterior probability of the hypothesis are the same number; P(data|H) can be read as P(H|data).",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    },
+    "f574c1ec239b3e7187aad9d66088353d": {
+      "agent": "grader",
+      "output": {
+        "confidence": 0.92,
+        "correct": true,
+        "feedback": "That matches the expected answer. You named the rule and applied it.",
+        "misconception_id": null,
+        "reasoning": "Answer is identical in substance to the expected response."
+      },
+      "prompt": "item_id: item-fixed-0001\nobjective_id: bayes_theorem\nkind: short\nstem: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\nexpected answer: A correct, complete response to: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.\nknown misconceptions:\n- mis_posterior_prob_of_data: The p-value and the posterior probability of the hypothesis are the same number; P(data|H) can be read as P(H|data).\n\nlearner answer:\nA correct, complete response to: A test has 99% sensitivity and 95% specificity; prevalence is 0.1%. Compute P(disease | positive) and explain the surprise.",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    }
+  },
+  "version": 1
+}

@@ -28,6 +28,13 @@ app = typer.Typer(
 domain_app = typer.Typer(name="domain", help="Work with domain packs.", no_args_is_help=True)
 app.add_typer(domain_app)
 
+# Phase 1 commands own their own modules; the CLI only wires them in.
+from the_oracle.commands import assess as _assess_cmd  # noqa: E402
+from the_oracle.commands import learner as _learner_cmd  # noqa: E402
+
+app.add_typer(_assess_cmd.app)
+app.add_typer(_learner_cmd.app, name="learner")
+
 def _not_built(command: str, phase: str) -> None:
     console.print(
         Panel(
@@ -165,12 +172,6 @@ def rebuild(
     table.add_row("derived rows", str(report.rows_written))
     table.add_row("tables cleared", ", ".join(report.tables_cleared) or "-")
     console.print(table)
-
-
-@app.command()
-def assess(domain_id: Annotated[str, typer.Argument()] = "") -> None:
-    """Run the adaptive diagnostic."""
-    _not_built("assess", "Phase 1 (Know me)")
 
 
 @app.command()

@@ -214,10 +214,44 @@ def _source_files() -> Iterator[Path]:
     yield from sorted(SRC.rglob("*.py"))
 
 
-def test_no_subject_matter_in_src() -> None:
+def test_no_domain_content_in_src(packs_home: Path) -> None:
+    """The real leakage test: no shipped pack identifier may appear in src/.
+
+    This is stronger than a word grep. It catches an objective id, a module id,
+    or a domain id hardcoded into the engine, which is what "domains are data"
+    actually forbids.
+    """
+    domain = registry.load_domain(DOMAIN_ID)
+    identifiers = {DOMAIN_ID}
+    identifiers |= {ref.id for ref in domain.objectives}
+    identifiers |= {module.id for module in domain.modules}
+    identifiers |= {mc.id for mc in domain.misconceptions}
+
+    leaks: list[str] = []
+    for path in _source_files():
+        text = path.read_text(encoding="utf-8")
+        for identifier in identifiers:
+            if identifier in text:
+                rel = path.relative_to(REPO_ROOT)
+                leaks.append(f"{rel}: contains pack identifier {identifier!r}")
+    assert not leaks, "domain content leaked into src/the_oracle:\n" + "\n".join(leaks)
+
+
+#: Files allowed to use generic learning-science vocabulary that happens to
+#: collide with the seed domain. Bayesian Knowledge Tracing is an algorithm from
+#: the intelligent-tutoring literature, not subject matter: it would be named the
+#: same if the only domain were medieval poetry.
+SUBJECT_WORD_ALLOWLIST_PREFIXES = ("mastery/",)
+
+
+def test_no_subject_vocabulary_in_src() -> None:
+    """Weaker backstop: topic words outside the allowlisted algorithm modules."""
     pattern = re.compile(r"\b(" + "|".join(SUBJECT_WORDS) + r")\b", re.IGNORECASE)
     leaks: list[str] = []
     for path in _source_files():
+        rel_to_pkg = path.relative_to(SRC).as_posix()
+        if rel_to_pkg.startswith(SUBJECT_WORD_ALLOWLIST_PREFIXES):
+            continue
         for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
             if pattern.search(line):
                 rel = path.relative_to(REPO_ROOT)
