@@ -22,6 +22,7 @@ learner's interview and the model's draft.
 from __future__ import annotations
 
 import asyncio
+import logging
 import re
 import unicodedata
 from dataclasses import dataclass, field
@@ -31,6 +32,7 @@ import yaml
 from pydantic import BaseModel, Field
 
 from the_oracle.agents.base import Agent, Usage
+from the_oracle.agents.retrieval import RETRIEVAL_K, render_context, retrieve_context
 from the_oracle.config import Task
 from the_oracle.context import LearnerContext
 from the_oracle.domains import library
@@ -46,9 +48,11 @@ from the_oracle.domains.schema import (
 )
 
 if TYPE_CHECKING:  # pragma: no cover
-    from collections.abc import Iterable
+    from collections.abc import Iterable, Sequence
 
     from sqlalchemy import Engine
+
+log = logging.getLogger(__name__)
 
 BLOOM_LEVELS: tuple[str, ...] = (
     "remember",
@@ -106,6 +110,12 @@ class DraftObjective(BaseModel):
             "Three to six short topic keywords. Required: they are how this "
             "objective is later matched against the shared library, so an "
             "objective without tags is harder to reuse."
+        ),
+    )
+    existing_id: str | None = Field(
+        default=None,
+        description=(
+            "Id of a library objective this reuses verbatim. Null when new."
         ),
     )
 
@@ -222,14 +232,42 @@ class Architect(Agent[Interview, DraftDomain]):
     output_type = DraftDomain
     role = ARCHITECT_ROLE
 
+    def __init__(
+        self,
+        engine: "Engine | None" = None,
+        *,
+        model: str | None = None,
+        embedder: Any = None,
+        retrieval_k: int = RETRIEVAL_K,
+    ) -> None:
+        super().__init__(engine, model=model)
+        self._embedder = embedder
+        self._retrieval_k = retrieval_k
+
     async def _run(self, ctx: LearnerContext, payload: Interview) -> tuple[DraftDomain, Usage]:
-        draft, usage = await self._run_llm(self.prompt(payload))
+        # Retrieval happens here, inside the one method every caller of the
+        # Architect goes through, so the drafting path cannot be shipped
+        # without it. A component wired only in tests is a component that
+        # does not exist.
+        retrieved = retrieve_context(
+            payload, k=self._retrieval_k, embedder=self._embedder
+        )
+        draft, usage = await self._run_llm(self.prompt(payload, retrieved))
         return self.normalise(draft, payload), usage
 
-    def prompt(self, payload: Interview) -> str:
-        """The user-side prompt. Deterministic, so cassettes key on it."""
+    def prompt(
+        self, payload: Interview, retrieved: "Sequence[Objective] | None" = None
+    ) -> str:
+        """The user-side prompt. Deterministic, so cassettes key on it.
+
+        ``retrieved`` is what the shared library already teaches near this
+        learner's goal. It is interpolated into the returned string, not merely
+        built: a prompt block that is assembled and then dropped has shipped in
+        this project twice, and it looks exactly like success from the outside.
+        """
         must = "\n".join(f"- {m}" for m in payload.must_cover) or "- (nothing named)"
         skip = "\n".join(f"- {m}" for m in payload.exclude) or "- (nothing excluded)"
+        context = render_context(retrieved or [])
         return (
             f"goal: {payload.goal}\n"
             f"background: {payload.background}\n"
@@ -239,7 +277,8 @@ class Architect(Agent[Interview, DraftDomain]):
             f"teaching minutes available: {payload.budget_minutes}\n"
             f"must cover:\n{must}\n"
             f"exclude:\n{skip}\n\n"
-            "Draft the curriculum. Reference every objective by its exact "
+            + (f"{context}\n\n" if context else "")
+            + "Draft the curriculum. Reference every objective by its exact "
             "title in edges, modules, and misconceptions. Do not invent ids. "
             "Keep the total of est_minutes inside the teaching minutes above."
         )
@@ -268,6 +307,7 @@ class Architect(Agent[Interview, DraftDomain]):
                         "est_minutes": max(1, obj.est_minutes),
                         "assessment_stems": [s.strip() for s in obj.assessment_stems if s.strip()],
                         "tags": sorted({t.strip().casefold() for t in obj.tags if t.strip()}),
+                        "existing_id": (obj.existing_id or "").strip() or None,
                     }
                 )
             )
@@ -332,16 +372,37 @@ class DomainPlan:
     reused: dict[str, str] = field(default_factory=dict)
     minted: dict[str, Objective] = field(default_factory=dict)
     resolved: dict[str, Objective] = field(default_factory=dict)
+    #: Titles the Architect itself claimed, by the library id it claimed.
+    retrieved: dict[str, str] = field(default_factory=dict)
 
     @property
     def total_minutes(self) -> int:
         return sum(self.resolved[ref.id].est_minutes for ref in self.domain.objectives)
 
-    def score_for(self, title: str) -> float:
+    def match_for(self, title: str) -> Any:
         for match in self.matches:
             if getattr(match, "candidate_title", None) == title:
-                return float(getattr(match, "score", 0.0))
-        return 0.0
+                return match
+        return None
+
+    def score_for(self, title: str) -> float:
+        match = self.match_for(title)
+        return float(getattr(match, "score", 0.0)) if match is not None else 0.0
+
+    def reason_for(self, title: str) -> str:
+        """Why this objective ended up reused or new, in one word.
+
+        ``retrieved`` the Architect chose it, ``matched`` the score was strong
+        enough on its own, ``judged`` the Critic agreed on a borderline match,
+        ``new`` nothing in the library covered it.
+        """
+        if title in self.retrieved:
+            return "retrieved"
+        if title not in self.reused:
+            return "new"
+        match = self.match_for(title)
+        decision = str(getattr(match, "decision", ""))
+        return "judged" if decision == "adjudicate" else "matched"
 
 
 def _load_dedupe() -> Any:
@@ -356,9 +417,20 @@ def draft_domain(
     *,
     engine: "Engine | None" = None,
     learner_id: str | None = None,
+    embedder: Any = None,
 ) -> DraftDomain:
-    """Run the Architect once. One LLM call, and it is not a cheap one."""
-    return asyncio.run(draft_domain_async(interview, engine=engine, learner_id=learner_id))
+    """Run the Architect once. One LLM call, and it is not a cheap one.
+
+    The Architect retrieves the nearest existing library objectives first and
+    drafts against them, so it can reuse instead of reinventing. ``embedder``
+    is for tests and for callers that already hold one; the default picks the
+    same embedder dedupe uses.
+    """
+    return asyncio.run(
+        draft_domain_async(
+            interview, engine=engine, learner_id=learner_id, embedder=embedder
+        )
+    )
 
 
 async def draft_domain_async(
@@ -366,12 +438,13 @@ async def draft_domain_async(
     *,
     engine: "Engine | None" = None,
     learner_id: str | None = None,
+    embedder: Any = None,
 ) -> DraftDomain:
     """Async body of :func:`draft_domain`."""
     ctx = (
         LearnerContext.for_learner(learner_id) if learner_id else LearnerContext.resolve()
     )
-    architect = Architect(engine)
+    architect = Architect(engine, embedder=embedder)
     result = await architect.run(ctx, interview)
     return result.output
 
@@ -420,10 +493,37 @@ def plan_domain(
     dedupe = _load_dedupe()
     existing = list(library.all_objectives())
     candidates = draft_objectives_as_objectives(draft)
-    matches = list(dedupe.match_all(candidates, existing, embedder=embedder))
-    resolution: dict[str, str | None] = dict(dedupe.resolve(matches, judge=judge))
-
     by_id = {obj.id: obj for obj in existing}
+
+    # The Architect saw these objectives before it drafted, so a claim it makes
+    # is evidence dedupe does not have. Honour it, and skip the scoring pass for
+    # that candidate: no embedding, and no Critic call, for a question already
+    # answered.
+    retrieved: dict[str, str] = {}
+    scored_pairs: list[tuple[DraftObjective, Objective]] = []
+    for draft_obj, candidate in zip(draft.objectives, candidates, strict=True):
+        claim = (draft_obj.existing_id or "").strip()
+        if claim and claim in by_id:
+            retrieved[draft_obj.title] = claim
+            continue
+        if claim:
+            # Hallucinated or stale. Never fatal, and never a silent reuse of
+            # whatever happens to be nearby: drop the claim and let dedupe rule.
+            log.warning(
+                "the Architect claimed existing_id %r for %r, which is not in "
+                "the library; dropping the claim and falling through to dedupe",
+                claim,
+                draft_obj.title,
+            )
+        scored_pairs.append((draft_obj, candidate))
+
+    scored_matches = list(
+        dedupe.match_all([c for _, c in scored_pairs], existing, embedder=embedder)
+    )
+    resolution: dict[str, str | None] = dict(dedupe.resolve(scored_matches, judge=judge))
+
+    matches = _ordered_matches(draft, retrieved, scored_matches, dedupe)
+
     taken = set(by_id)
     reused: dict[str, str] = {}
     minted: dict[str, Objective] = {}
@@ -432,7 +532,7 @@ def plan_domain(
 
     for draft_obj, candidate in zip(draft.objectives, candidates, strict=True):
         title = draft_obj.title
-        reuse_id = resolution.get(title)
+        reuse_id = retrieved.get(title) or resolution.get(title)
         if reuse_id and reuse_id in by_id:
             ids[title] = reuse_id
             reused[title] = reuse_id
@@ -455,7 +555,44 @@ def plan_domain(
         reused=reused,
         minted=minted,
         resolved=resolved,
+        retrieved={t: oid for t, oid in retrieved.items() if reused.get(t) == oid},
     )
+
+
+def _ordered_matches(
+    draft: DraftDomain,
+    retrieved: dict[str, str],
+    scored_matches: list[Any],
+    dedupe: Any,
+) -> list[Any]:
+    """One match per drafted objective, in draft order.
+
+    A retrieval claim gets a :class:`~the_oracle.domains.dedupe.Match` of its
+    own, marked ``retrieved``, so the report can tell a choice the Architect
+    made apart from a score this engine computed.
+    """
+    by_title = {m.candidate_title: m for m in scored_matches}
+    out: list[Any] = []
+    for draft_obj in draft.objectives:
+        title = draft_obj.title
+        claim = retrieved.get(title)
+        if claim is not None:
+            out.append(
+                dedupe.Match(
+                    candidate_title=title,
+                    decision=dedupe.Decision.REUSE,
+                    best_id=claim,
+                    # Not scored: no similarity was computed for this pair, and
+                    # a fabricated number would read like evidence.
+                    score=0.0,
+                    source=dedupe.SOURCE_RETRIEVED,
+                )
+            )
+            continue
+        match = by_title.get(title)
+        if match is not None:
+            out.append(match)
+    return out
 
 
 def commit(plan: DomainPlan) -> Domain:
@@ -502,7 +639,7 @@ def build_domain(
     new objectives, writes those objectives, assembles the manifest, and
     validates the whole thing. Nothing is persisted unless everything holds.
     """
-    draft = draft_domain(interview, engine=engine)
+    draft = draft_domain(interview, engine=engine, embedder=embedder)
     plan = plan_domain(draft, interview, embedder=embedder, judge=judge)
     domain = commit(plan)
     return domain, plan.matches

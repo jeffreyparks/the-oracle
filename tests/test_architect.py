@@ -599,6 +599,42 @@ def test_the_prompt_is_deterministic_and_carries_the_interview(engine: Engine) -
     assert str(payload.budget_minutes) in first
 
 
+def test_the_prompt_shows_the_architect_the_library_before_it_drafts(
+    engine: Engine, lexical: LexicalEmbedder
+) -> None:
+    """Retrieval must be wired into the shipped draft path, not just tested.
+
+    Regression guard for this project's most expensive failure mode: a
+    component that is built, unit-tested, and never called on the real path
+    (the stale ``domain add`` stub in Phase 0, the unwired Critic in Phase 2).
+    So the assertion is made against the prompt that ``build_domain`` actually
+    sent, recovered from the cassette tape.
+    """
+    from the_oracle.agents.retrieval import CONTEXT_HEADER
+
+    shelf = seed(make_objective("already_on_the_shelf", "A Skill Already Owned", "Filler."))
+    payload = Interview.model_validate(INTERVIEW)
+    with cassette(CASSETTE, synthesize=synthesize) as tape:
+        build_domain(payload, embedder=lexical, engine=engine)
+
+    prompt = tape.calls[0]["prompt"]
+    assert CONTEXT_HEADER in prompt
+    assert f"id: {shelf.id}" in prompt
+    assert "existing_id" in prompt
+
+
+def test_the_prompt_has_no_library_block_when_there_is_nothing_to_show(
+    engine: Engine, lexical: LexicalEmbedder
+) -> None:
+    """An empty library is the normal first run, and must not add noise."""
+    from the_oracle.agents.retrieval import CONTEXT_HEADER
+
+    payload = Interview.model_validate(INTERVIEW)
+    with cassette(CASSETTE, synthesize=synthesize) as tape:
+        build_domain(payload, embedder=lexical, engine=engine)
+    assert CONTEXT_HEADER not in tape.calls[0]["prompt"]
+
+
 def test_budget_minutes_discounts_for_real_life() -> None:
     payload = Interview.model_validate({**INTERVIEW, "hours_per_week": 10, "target_weeks": 2})
     assert payload.budget_minutes == int(10 * 60 * 2 * 0.8)

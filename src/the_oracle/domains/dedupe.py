@@ -68,6 +68,11 @@ RUNNERS_UP = 3
 #: A Critic verdict below this confidence is not strong enough to merge.
 JUDGE_MIN_CONFIDENCE = 0.6
 
+#: Where a :class:`Match` came from. Scoring is this module; retrieval is the
+#: Architect choosing a library id it was shown before it drafted.
+SOURCE_SCORED = "scored"
+SOURCE_RETRIEVED = "retrieved"
+
 #: Bloom levels, ordered. Distance between two levels is a depth gap.
 BLOOM_ORDER: tuple[str, ...] = (
     "remember",
@@ -92,6 +97,11 @@ class Match:
     ``score`` is the final, guarded score: cosine similarity minus the depth
     penalty. ``thresholds`` and ``embedder_name`` record the bar that score had
     to clear, so a decision can be audited long after the run.
+
+    ``source`` says where the decision came from: :data:`SOURCE_SCORED` for this
+    module, or :data:`SOURCE_RETRIEVED` when the Architect saw the objective in
+    its prompt and chose it by id. A human auditing a reuse needs to know which,
+    because the two carry different evidence.
     """
 
     candidate_title: str
@@ -102,6 +112,7 @@ class Match:
     embedder_name: str = ""
     thresholds: tuple[float, float] = (REUSE_THRESHOLD, ADJUDICATE_THRESHOLD)
     lexical: bool = False
+    source: str = SOURCE_SCORED
 
     @property
     def raised(self) -> bool:
@@ -115,7 +126,8 @@ class Match:
         return (
             f"{self.candidate_title!r}: {self.decision.value} "
             f"score={self.score:.3f} best={self.best_id} "
-            f"bar={reuse:.2f}/{adjudicate:.2f}{note} via {self.embedder_name}"
+            f"bar={reuse:.2f}/{adjudicate:.2f}{note} via {self.embedder_name} "
+            f"[{self.source}]"
         )
 
 

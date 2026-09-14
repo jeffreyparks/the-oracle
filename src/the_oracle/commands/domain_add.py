@@ -81,21 +81,53 @@ def run_interview() -> "Interview":
     )
 
 
+#: What each reason word means, shown under the table so nobody has to guess.
+REASON_HELP = {
+    "retrieved": "the Architect saw it and chose it",
+    "matched": "the similarity score was strong enough",
+    "judged": "borderline, and the Critic agreed",
+    "new": "nothing in your library covered it",
+}
+
+
 def dedupe_table(plan: "DomainPlan") -> Table:
-    """Reused versus new, with the match score behind each decision."""
+    """Reused versus new, with the reason and score behind each decision.
+
+    The reason column exists because reuse now has two different origins. A
+    ``retrieved`` reuse is a judgement the model made from the library it was
+    shown; a ``matched`` one is arithmetic. They deserve different amounts of
+    trust, so a human gets to see which is which before saying yes.
+    """
     table = Table(title="what this pack reuses", title_justify="left", box=None, pad_edge=False)
     table.add_column("objective", style="bold")
     table.add_column("decision")
+    table.add_column("reason")
     table.add_column("id")
     table.add_column("score", justify="right")
     for draft_obj in plan.draft.objectives:
         title = draft_obj.title
-        score = plan.score_for(title)
+        reason = plan.reason_for(title)
+        # A retrieved reuse was never scored, so there is no number to show.
+        score = "-" if reason == "retrieved" else f"{plan.score_for(title):.2f}"
         if title in plan.reused:
-            table.add_row(title, "[green]reuse[/green]", plan.reused[title], f"{score:.2f}")
+            table.add_row(title, "[green]reuse[/green]", reason, plan.reused[title], score)
         else:
-            table.add_row(title, "[cyan]new[/cyan]", plan.minted[title].id, f"{score:.2f}")
+            table.add_row(title, "[cyan]new[/cyan]", reason, plan.minted[title].id, score)
     return table
+
+
+def reuse_summary(plan: "DomainPlan") -> str:
+    """``12 objectives, 5 reused (4 retrieved, 1 judged), 7 new.``"""
+    counts: dict[str, int] = {}
+    for title in plan.reused:
+        reason = plan.reason_for(title)
+        counts[reason] = counts.get(reason, 0) + 1
+    parts = [f"{counts[r]} {r}" for r in ("retrieved", "matched", "judged") if counts.get(r)]
+    detail = f" ({', '.join(parts)})" if parts else ""
+    return (
+        f"{len(plan.domain.objectives)} objectives, "
+        f"{len(plan.reused)} reused{detail}, {len(plan.minted)} new."
+    )
 
 
 def show_plan(plan: "DomainPlan") -> None:
@@ -117,13 +149,15 @@ def show_plan(plan: "DomainPlan") -> None:
         console.print()
 
     console.print(dedupe_table(plan))
+    console.print(
+        "[dim]reason: " + "; ".join(f"{k} = {v}" for k, v in REASON_HELP.items()) + "[/dim]"
+    )
     console.print()
 
     hours = plan.total_minutes / 60
     weeks = plan.interview.target_weeks or 1
     console.print(
-        f"{len(domain.objectives)} objectives, {len(plan.reused)} reused, "
-        f"{len(plan.minted)} new. {hours:.1f} hours of teaching time, "
+        f"{reuse_summary(plan)} {hours:.1f} hours of teaching time, "
         f"about {hours / weeks:.1f} hours a week over {weeks} weeks."
     )
     if plan.reused:
