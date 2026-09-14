@@ -11,4 +11,7 @@ assessment_stems:
   each.
 - Why does fake-data recovery test the code and the model but not the world?
 tags:
-- gen
+- calibration
+- fake-data
+- recovery
+- simulation-based

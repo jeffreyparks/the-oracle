@@ -10,4 +10,8 @@ assessment_stems:
 - A student claims P(A or B) = P(A) + P(B) for any A, B. Give a counterexample and the correct rule.
 - Show that P(A^c) = 1 - P(A) follows from the axioms.
 tags:
-- prob
+- axioms
+- events
+- probability
+- sample
+- spaces

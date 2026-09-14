@@ -28,11 +28,25 @@ app = typer.Typer(
 domain_app = typer.Typer(name="domain", help="Work with domain packs.", no_args_is_help=True)
 app.add_typer(domain_app)
 
-# Phase 1 commands own their own modules; the CLI only wires them in.
+# Feature commands own their own modules; the CLI only wires them in.
+#
+# Single-action commands are registered as COMMANDS, not sub-apps. Wiring a
+# one-callback Typer group with add_typer makes click treat any option after the
+# positional argument as a subcommand name, so `domain add "goal" --yes` fails
+# with "No such command '--yes'". Registering the function directly parses
+# options in either position.
 from the_oracle.commands import assess as _assess_cmd  # noqa: E402
+from the_oracle.commands import domain_add as _domain_add_cmd  # noqa: E402
 from the_oracle.commands import learner as _learner_cmd  # noqa: E402
+from the_oracle.commands import plan as _plan_cmd  # noqa: E402
 
-app.add_typer(_assess_cmd.app)
+app.command("assess", help="Run the adaptive diagnostic for a domain.")(_assess_cmd.assess)
+app.command("plan", help="Build or refresh the syllabus.")(_plan_cmd.plan)
+domain_app.command("add", help="Create a new domain pack from an interview.")(
+    _domain_add_cmd.domain_add
+)
+
+# `learner` is a genuine group with several commands, so it stays a sub-app.
 app.add_typer(_learner_cmd.app, name="learner")
 
 def _not_built(command: str, phase: str) -> None:
@@ -135,14 +149,6 @@ def domain_show(
         console.print("teaching order: " + " -> ".join(order))
 
 
-@domain_app.command("add")
-def domain_add(
-    brief: Annotated[str, typer.Argument(help="What you want to learn.")] = "",
-) -> None:
-    """Generate a new domain pack from an interview."""
-    _not_built("domain add", "Phase 2 (Plan me)")
-
-
 @app.command()
 def rebuild(
     learner: Annotated[str | None, typer.Option(help="Learner id. Defaults to the current one.")] = None,
@@ -172,12 +178,6 @@ def rebuild(
     table.add_row("derived rows", str(report.rows_written))
     table.add_row("tables cleared", ", ".join(report.tables_cleared) or "-")
     console.print(table)
-
-
-@app.command()
-def plan(domain_id: Annotated[str, typer.Argument()] = "") -> None:
-    """Build or refresh the syllabus."""
-    _not_built("plan", "Phase 2 (Plan me)")
 
 
 @app.command()

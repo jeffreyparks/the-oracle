@@ -10,4 +10,7 @@ assessment_stems:
 - Explain why mean-field VI typically underestimates posterior variance; illustrate on a correlated Normal.
 - Given a 2M-row dataset with a deadline, argue for or against VI over NUTS.
 tags:
-- vi
+- elbo
+- mean-field
+- inference
+- variational

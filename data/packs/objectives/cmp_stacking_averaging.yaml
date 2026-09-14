@@ -10,4 +10,7 @@ assessment_stems:
 - Contrast stacking with Bayesian model averaging under an open-world assumption.
 - Show a case where an averaged forecast beats every individual model on log score.
 tags:
-- cmp
+- model
+- stacking
+- averaging
+- ensembles

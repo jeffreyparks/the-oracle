@@ -10,4 +10,7 @@ assessment_stems:
 - Explain why a group-level predictor reduces the group-level sd rather than the residual sd.
 - Distinguish within-group and between-group effects and show how to separate them by centering.
 tags:
-- hier
+- cross-level
+- interactions
+- group-level
+- predictors

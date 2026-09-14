@@ -11,4 +11,7 @@ assessment_stems:
 - Interpret a non-converging ELBO trace and list two fixes.
 - Describe a diagnostic (e.g. importance-weighted check) that detects a bad variational approximation.
 tags:
-- vi
+- advi
+- practical
+- variational
+- workflows

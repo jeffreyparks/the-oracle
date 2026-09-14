@@ -10,4 +10,5 @@ assessment_stems:
 - Your acceptance rate is 2%. Diagnose the cause and fix it; then explain why 99% is also bad.
 - Show why the proposal density cancels when the proposal is symmetric.
 tags:
-- mcmc
+- metropolis-hastings
+- scratch

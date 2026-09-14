@@ -11,4 +11,6 @@ assessment_stems:
 - Explain the role of knot count versus the penalty prior; which matters more and why?
 - Compare a spline fit to a Gaussian process fit on the same data and state the trade-offs.
 tags:
-- reg
+- smooth
+- splines
+- gaussian-additive

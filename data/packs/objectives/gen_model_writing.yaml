@@ -11,4 +11,6 @@ assessment_stems:
 - Given PPL code, back-translate it into complete statistical notation including all priors.
 - Simulate a dataset from your own model, then recover the known parameters and report bias.
 tags:
-- gen
+- generative
+- model
+- writing

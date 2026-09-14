@@ -12,4 +12,8 @@ assessment_stems:
 - Explain how spike-and-slab or regularized priors handle many candidate regressors.
 - Attribute a forecast change to a specific component and defend the attribution.
 tags:
-- ts
+- structural
+- bsts-style
+- decomposition
+- series
+- time

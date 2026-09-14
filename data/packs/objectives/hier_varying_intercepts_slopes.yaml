@@ -11,4 +11,6 @@ assessment_stems:
 - Choose an LKJ prior for the correlation matrix and justify the eta value.
 - Explain what the group-level sd posterior being near zero implies.
 tags:
-- hier
+- varying
+- intercepts
+- slopes

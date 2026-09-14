@@ -11,4 +11,8 @@ assessment_stems:
 - Set a seed so a sampling run is byte-reproducible, and show the evidence.
 - Convert raw sampler output into an ArviZ InferenceData object and inspect its groups.
 tags:
-- tool
+- probability
+- python
+- setup
+- stack
+- tooling

@@ -11,4 +11,8 @@ assessment_stems:
 - Explain 'typical set' and why the posterior mode is not where the mass is in high dimensions.
 - Name two models where conjugacy fails and say why.
 tags:
-- mcmc
+- dimensions
+- high
+- intractable
+- posteriors
+- sampling

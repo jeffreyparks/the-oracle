@@ -11,4 +11,6 @@ assessment_stems:
 - Explain how the initial conditions are handled and why they matter for short series.
 - Show the posterior forecast fan from an ARIMA model and explain why it widens.
 tags:
-- ts
+- bayesian
+- models
+- arima

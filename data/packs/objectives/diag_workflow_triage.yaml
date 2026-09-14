@@ -10,4 +10,7 @@ assessment_stems:
 - A model has high R-hat, low ESS, and divergences at once. What do you fix first and why?
 - Distinguish a computation problem from a model problem given only diagnostic output.
 tags:
-- diag
+- decision
+- diagnostic
+- procedure
+- triage

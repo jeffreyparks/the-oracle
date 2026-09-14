@@ -12,4 +12,5 @@ assessment_stems:
 - When is the posterior mode a poor summary? Give a distribution where it misleads.
 - Rewrite a p-value-style conclusion as an honest posterior statement.
 tags:
-- bayes
+- posterior
+- summaries

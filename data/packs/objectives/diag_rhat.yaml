@@ -10,4 +10,6 @@ assessment_stems:
 - Why does R-hat require multiple chains with dispersed inits?
 - Interpret R-hat = 1.08 for one parameter and give the next three actions.
 tags:
-- diag
+- r-hat
+- agreement
+- between-chain

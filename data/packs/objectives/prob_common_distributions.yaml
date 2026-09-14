@@ -12,4 +12,7 @@ assessment_stems:
 - Why is the Beta the natural family for an unknown proportion, and the Gamma for an unknown rate?
 - Given four datasets, assign a likelihood family to each and defend the choice in one sentence.
 tags:
-- prob
+- stories
+- distribution
+- families
+- binomial

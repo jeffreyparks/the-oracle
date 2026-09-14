@@ -10,4 +10,7 @@ assessment_stems:
 - Show why plugging in posterior mean parameters understates forecast uncertainty.
 - Compute the predictive distribution of a cumulative 12-month total, not just each month.
 tags:
-- ts
+- distributions
+- propagate
+- uncertainty
+- forecast

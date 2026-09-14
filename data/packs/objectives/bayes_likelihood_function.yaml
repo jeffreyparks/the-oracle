@@ -12,4 +12,6 @@ assessment_stems:
   them.
 - Explain why the likelihood need only be specified up to a constant in theta.
 tags:
-- bayes
+- function
+- likelihood
+- interpretation

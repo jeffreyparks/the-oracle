@@ -10,4 +10,9 @@ assessment_stems:
 - Contrast a fixed seasonal dummy set with a time-varying seasonal state; when is each right?
 - Handle a series with holidays that move each year, and state the modeling choice.
 tags:
-- ts
+- seasonal
+- seasonality
+- dummy
+- effects
+- fourier
+- time-varying

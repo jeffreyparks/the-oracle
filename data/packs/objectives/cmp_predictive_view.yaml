@@ -11,4 +11,7 @@ assessment_stems:
 - Why does adding a predictor always improve in-sample fit but not necessarily prediction?
 - Define elpd in words and say what quantity it is an expectation over.
 tags:
-- cmp
+- accuracy
+- comparison
+- predictive
+- target

@@ -11,4 +11,8 @@ assessment_stems:
 - State the conditions (irreducibility, aperiodicity) needed for convergence and give a chain that fails
   one.
 tags:
-- mcmc
+- chain
+- markov
+- balance
+- detailed
+- stationarity

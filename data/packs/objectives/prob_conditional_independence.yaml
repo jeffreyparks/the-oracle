@@ -10,4 +10,6 @@ assessment_stems:
 - From a 2x2 contingency table, compute P(disease | positive test) and interpret it.
 - Explain why 'A and B are independent' does not imply 'A and B are independent given C'.
 tags:
-- prob
+- conditional
+- independence
+- probability

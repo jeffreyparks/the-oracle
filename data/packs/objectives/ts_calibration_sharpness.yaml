@@ -10,4 +10,6 @@ assessment_stems:
 - State the 'sharpness subject to calibration' principle and give a forecast that is calibrated but useless.
 - Report empirical coverage of 50% and 90% intervals by horizon and interpret the pattern.
 tags:
-- ts
+- calibration
+- sharpness
+- forecast

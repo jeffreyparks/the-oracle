@@ -12,4 +12,6 @@ assessment_stems:
   and when not?
 - Design a simulation showing a credible interval's frequentist coverage under a misspecified prior.
 tags:
-- bayes
+- intervals
+- confidence
+- credible

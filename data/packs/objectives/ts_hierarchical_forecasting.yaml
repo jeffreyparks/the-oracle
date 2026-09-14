@@ -12,4 +12,7 @@ assessment_stems:
 - Show how partial pooling across series improves forecasts for short-history series.
 - Contrast bottom-up, top-down, and optimal reconciliation and state when each wins.
 tags:
-- ts
+- forecast
+- grouped
+- hierarchical
+- reconciliation

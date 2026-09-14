@@ -12,3 +12,6 @@ assessment_stems:
 - Elicit a prior for a positive scale parameter and defend Half-Normal vs Exponential vs Half-Cauchy.
 tags:
 - prior
+- elicitation
+- scale
+- setting

@@ -10,4 +10,9 @@ assessment_stems:
 - Explain why a random walk is non-stationary and what differencing does to its variance.
 - Decompose a series into trend, seasonal, and remainder and state what the remainder should look like.
 tags:
-- ts
+- stationarity
+- acf
+- decomposition
+- foundations
+- series
+- time

@@ -10,4 +10,8 @@ assessment_stems:
 - Explain why a pdf value may exceed 1 but a pmf value may not.
 - Sketch the CDF of a mixture of a point mass at 0 and a Normal, and name where it is discontinuous.
 tags:
-- prob
+- random
+- variables
+- cdfs
+- pdfs
+- pmfs

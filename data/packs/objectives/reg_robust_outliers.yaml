@@ -11,4 +11,8 @@ assessment_stems:
   you.
 - Contrast deleting outliers with modeling them; state the inferential cost of each.
 tags:
-- reg
+- heavy
+- regression
+- robust
+- tails
+- likelihoods

@@ -11,4 +11,7 @@ assessment_stems:
 - Explain why a GP's forecast uncertainty reverts toward the prior far from data.
 - Given O(n^3) cost, name two approximations and their assumptions.
 tags:
-- ts
+- gaussian
+- processes
+- series
+- time

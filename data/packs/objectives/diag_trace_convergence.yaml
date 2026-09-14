@@ -10,4 +10,8 @@ assessment_stems:
 - Why must warmup draws be discarded, and why is warmup not just 'burn-in'?
 - Two chains explore different modes. What does that say about the posterior and the model?
 tags:
-- diag
+- plots
+- trace
+- warmup
+- convergence
+- eye

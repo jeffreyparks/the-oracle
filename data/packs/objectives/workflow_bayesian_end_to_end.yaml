@@ -11,4 +11,6 @@ assessment_stems:
 - Given a colleague's notebook, audit which workflow stages are missing and what risk each omission creates.
 - Describe how you would version models and results so a fit from six months ago is reproducible.
 tags:
+- end
+- bayesian
 - workflow

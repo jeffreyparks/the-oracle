@@ -10,4 +10,8 @@ assessment_stems:
 - Explain the Jeffreys-Lindley paradox in one paragraph with a concrete example.
 - When is a Bayes factor the right tool, and when is LOO the right tool?
 tags:
-- cmp
+- bayes
+- factors
+- hazards
+- likelihood
+- marginal

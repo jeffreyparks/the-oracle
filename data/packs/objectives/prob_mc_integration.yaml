@@ -11,4 +11,9 @@ assessment_stems:
 - How many draws are needed so the MC standard error of a mean is below 1% of the posterior sd?
 - Why can any posterior summary be computed from draws without ever writing down the posterior density?
 tags:
-- prob
+- carlo
+- monte
+- integration
+- large
+- law
+- numbers

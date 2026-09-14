@@ -10,4 +10,8 @@ assessment_stems:
 - Produce a trace plot, rank plot, and forest plot for one model and say what each rules out.
 - Use ArviZ to compare two models and read the output table correctly.
 tags:
-- tool
+- arviz
+- inferencedata
+- diagnostics
+- plots
+- tooling

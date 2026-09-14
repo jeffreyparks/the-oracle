@@ -11,4 +11,6 @@ assessment_stems:
 - A forecaster reports a mean of 100 and sd of 40 for a strictly positive quantity. What does this imply
   about skew?
 tags:
-- prob
+- expectation
+- variance
+- moments

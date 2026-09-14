@@ -10,4 +10,8 @@ assessment_stems:
 - Contrast an explicit changepoint model with a state space model whose state noise is large.
 - Explain the forecasting risk of fitting a break that is really noise.
 tags:
-- ts
+- breaks
+- regime
+- shifts
+- changepoints
+- structural

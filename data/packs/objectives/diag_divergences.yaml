@@ -10,4 +10,8 @@ assessment_stems:
 - Interpret a BFMI warning and say what it implies about the model, not just the sampler.
 - Why is 'raise target_accept until divergences vanish' sometimes hiding a real problem?
 tags:
-- diag
+- depth
+- diagnostics
+- divergences
+- energy
+- tree

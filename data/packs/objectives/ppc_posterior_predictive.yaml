@@ -12,4 +12,6 @@ assessment_stems:
 - State the integral that defines the posterior predictive and what is being marginalized out.
 - A stakeholder wants 'the interval for the next observation.' Which distribution do you use and why?
 tags:
-- ppc
+- posterior
+- distribution
+- predictive

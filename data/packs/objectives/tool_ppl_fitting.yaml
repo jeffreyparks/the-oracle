@@ -11,4 +11,9 @@ assessment_stems:
 - Read a sampler warning about maximum tree depth and state the concrete next action.
 - Explain what the PPL does with your prior statements at compile time.
 tags:
-- tool
+- model
+- fitting
+- numpyro
+- ppl
+- pymc
+- stan

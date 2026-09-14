@@ -10,4 +10,7 @@ assessment_stems:
 - Why do deep hierarchies with few groups per level produce weakly identified variance components?
 - Give a rule of thumb for the minimum number of groups before a hierarchical level is worth it.
 tags:
-- hier
+- crossed
+- deep
+- hierarchies
+- non-nested

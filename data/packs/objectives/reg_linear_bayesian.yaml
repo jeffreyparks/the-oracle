@@ -12,4 +12,6 @@ assessment_stems:
 - Explain what the posterior of sigma tells you that R-squared does not.
 - Add a redundant, highly collinear predictor and describe what happens to the coefficient posteriors.
 tags:
-- reg
+- bayesian
+- linear
+- regression

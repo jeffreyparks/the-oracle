@@ -10,4 +10,7 @@ assessment_stems:
 - Contrast MCAR, MAR, and MNAR and say which one complete-case analysis needs.
 - Explain why Bayesian imputation of a missing outcome is just marginalization.
 tags:
-- reg
+- error
+- measurement
+- data
+- missing

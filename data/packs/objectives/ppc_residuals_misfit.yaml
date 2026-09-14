@@ -10,4 +10,7 @@ assessment_stems:
 - Group residuals by a held-out covariate to reveal a missing interaction.
 - Why can raw residuals mislead for discrete or heteroskedastic outcomes?
 tags:
-- ppc
+- residual
+- analysis
+- locating
+- misfit

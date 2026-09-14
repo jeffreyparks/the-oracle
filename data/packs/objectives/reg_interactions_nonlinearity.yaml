@@ -10,4 +10,7 @@ assessment_stems:
 - Explain why a polynomial fit extrapolates dangerously, and show it on held-out range.
 - Compute and plot an average marginal effect from posterior draws.
 tags:
-- reg
+- effect
+- interactions
+- nonlinear
+- polynomials

@@ -10,4 +10,7 @@ assessment_stems:
 - Derive the Normal-Normal posterior mean as a precision-weighted average of prior mean and data mean.
 - Show how a Gamma-Poisson posterior behaves as exposure time grows without bound.
 tags:
-- bayes
+- conjugate
+- updates
+- closed-form
+- priors

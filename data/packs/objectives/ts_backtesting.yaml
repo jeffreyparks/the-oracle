@@ -10,4 +10,9 @@ assessment_stems:
 - Explain a concrete leakage path in a naive k-fold split of a time series.
 - Report scores by horizon and explain why an average over horizons can mislead.
 tags:
-- ts
+- time
+- backtesting
+- cross-validation
+- origin
+- rolling
+- series

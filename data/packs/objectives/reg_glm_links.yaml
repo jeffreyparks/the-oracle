@@ -11,4 +11,8 @@ assessment_stems:
 - Add an exposure offset to a Poisson model and explain why it is not a coefficient.
 - Data are overdispersed counts. Move from Poisson to negative binomial and show the effect on intervals.
 tags:
-- reg
+- functions
+- generalized
+- linear
+- link
+- models

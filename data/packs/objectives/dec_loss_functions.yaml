@@ -11,4 +11,9 @@ assessment_stems:
 - Show that the posterior mean, median, and mode are optimal under squared, absolute, and 0-1 loss.
 - A threshold decision uses P(effect > 0) > 0.95. Restate the implied loss function.
 tags:
-- dec
+- actions
+- loss
+- decision
+- functions
+- optimal
+- theory

@@ -10,4 +10,8 @@ assessment_stems:
 - Explain why a Normal forecast interval is wrong for low counts, with a numeric example.
 - Distinguish structural zeros from sampling zeros in a demand series.
 tags:
-- ts
+- counts
+- demand
+- inflation
+- intermittent
+- zero

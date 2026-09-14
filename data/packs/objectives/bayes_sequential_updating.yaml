@@ -11,4 +11,6 @@ assessment_stems:
 - Give a dataset where exchangeability plainly fails and say what structure must be added.
 - State de Finetti's theorem informally and connect it to hierarchical models.
 tags:
-- bayes
+- exchangeability
+- sequential
+- updates

@@ -11,3 +11,5 @@ assessment_stems:
 - Show a case where prior sensitivity is high precisely because the data are weakly identifying.
 tags:
 - prior
+- analysis
+- sensitivity

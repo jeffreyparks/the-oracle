@@ -14,3 +14,6 @@ assessment_stems:
 - Show algebraically why the posterior is unchanged if the likelihood is multiplied by a constant.
 tags:
 - bayes
+- posterior
+- theorem
+- anatomy

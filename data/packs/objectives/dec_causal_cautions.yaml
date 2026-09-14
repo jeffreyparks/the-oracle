@@ -11,4 +11,9 @@ assessment_stems:
 - A stakeholder reads a posterior slope as 'the effect of price on sales.' List the assumptions required.
 - Explain why adding every available covariate is not a safe default.
 tags:
-- dec
+- bayesian
+- causal
+- cautions
+- colliders
+- confounding
+- humility

@@ -11,4 +11,6 @@ assessment_stems:
 - Explain a Bayesian p-value for a test quantity and why values near 0.5 are not proof of a good model.
 - Design three test quantities for a sales forecasting model, one per failure mode you fear.
 tags:
-- ppc
+- quantities
+- posterior
+- predictive

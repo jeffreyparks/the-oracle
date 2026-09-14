@@ -10,4 +10,9 @@ assessment_stems:
 - Show that a scoring rule like MAPE is improper or degenerate, and construct a forecast that games it.
 - A model wins on CRPS but loses on log score. Explain what that reveals about its tails.
 tags:
-- ts
+- scores
+- proper
+- rules
+- score
+- crps
+- interval

@@ -11,4 +11,8 @@ assessment_stems:
 - Show how a local linear trend model handles a level shift, and where it fails.
 - Explain how missing observations are handled naturally in a state space formulation.
 tags:
-- ts
+- local
+- models
+- trend
+- linear
+- space

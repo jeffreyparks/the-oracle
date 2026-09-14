@@ -11,4 +11,7 @@ assessment_stems:
 - Why does HMC require a differentiable log density, and what does that forbid in your model?
 - Contrast NUTS's automatic trajectory length with fixed-length HMC and state the trade-off.
 tags:
-- mcmc
+- carlo
+- hamiltonian
+- monte
+- nuts

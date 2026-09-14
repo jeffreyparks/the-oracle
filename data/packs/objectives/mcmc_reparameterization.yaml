@@ -10,4 +10,6 @@ assessment_stems:
 - Plot the funnel for a small group-count model and explain why small tau causes divergences.
 - When is the centered parameterization actually the better choice?
 tags:
-- mcmc
+- reparameterize
+- centered
+- non-centered

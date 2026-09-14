@@ -11,4 +11,8 @@ assessment_stems:
 - Give a weakly informative prior for a regression slope on standardized data and justify the scale.
 - Name a case where an improper prior yields an improper posterior.
 tags:
+- informative
+- flat
 - prior
+- weakly
+- types

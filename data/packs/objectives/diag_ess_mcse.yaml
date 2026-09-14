@@ -10,4 +10,9 @@ assessment_stems:
 - Explain the difference between bulk ESS and tail ESS and which matters for a 99th percentile forecast.
 - Justify reporting posterior means to only two significant digits using MCSE.
 tags:
-- diag
+- carlo
+- effective
+- error
+- monte
+- sample
+- size

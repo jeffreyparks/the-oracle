@@ -11,4 +11,8 @@ assessment_stems:
 - Given a bivariate Normal, derive the conditional mean and variance of X1 given X2.
 - Explain why marginalizing a nuisance parameter is not the same as fixing it at its mean.
 tags:
-- prob
+- distributions
+- joint
+- marginalize
+- change
+- variables
