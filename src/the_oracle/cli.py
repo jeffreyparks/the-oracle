@@ -39,8 +39,10 @@ from the_oracle.commands import assess as _assess_cmd  # noqa: E402
 from the_oracle.commands import domain_add as _domain_add_cmd  # noqa: E402
 from the_oracle.commands import learner as _learner_cmd  # noqa: E402
 from the_oracle.commands import plan as _plan_cmd  # noqa: E402
+from the_oracle.commands import resources as _resources_cmd  # noqa: E402
 
 app.command("assess", help="Run the adaptive diagnostic for a domain.")(_assess_cmd.assess)
+app.command("resources", help="Fill the corpus for a module.")(_resources_cmd.resources)
 app.command("plan", help="Build or refresh the syllabus.")(_plan_cmd.plan)
 domain_app.command("add", help="Create a new domain pack from an interview.")(
     _domain_add_cmd.domain_add

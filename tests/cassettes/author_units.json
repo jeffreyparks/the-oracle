@@ -1,0 +1,174 @@
+{
+  "entries": {
+    "33a5717f370e3138df86bbbde2bf4b48": {
+      "agent": "author",
+      "output": {
+        "citations": [
+          "https://stat.example.edu/bayes-update"
+        ],
+        "code": "print('a prior is a belief')  # not needed here",
+        "exercises": [
+          {
+            "answer": "It states how plausible each hypothesis is before the data.",
+            "bloom": "understand",
+            "prompt": "State what a prior asserts, in one sentence.",
+            "wrong_answer_feedback": {
+              "It is the answer.": "You have collapsed the prior into the conclusion."
+            }
+          },
+          {
+            "answer": "It is not a result computed from the data at hand.",
+            "bloom": "remember",
+            "prompt": "Name one thing a prior is not.",
+            "wrong_answer_feedback": {}
+          },
+          {
+            "answer": "A base rate taken from a published population study.",
+            "bloom": "understand",
+            "prompt": "Give an example of a prior you could defend.",
+            "wrong_answer_feedback": {}
+          }
+        ],
+        "explainer": "A prior is the belief you hold before the data arrives.",
+        "review_summary": "A prior is a belief before data. A likelihood says how well the data fits each belief. Multiply, then renormalise, and you have the posterior. Check the base rate before you trust a strong-looking result.",
+        "worked_examples": [
+          "Worked example 1. Write the numbers down, then apply the rule step by step.",
+          "Worked example 2. Same rule, harder numbers, and one trap on the way through."
+        ]
+      },
+      "prompt": "objective_id: prior_meaning\ntitle: Explain what a prior represents\ndescription: Say in plain words what a prior probability claims before any data arrives.\nbloom: understand\ndifficulty: 2 (1 easiest, 5 hardest)\nest_minutes: 15\nexercise type required by this bloom level: recall\nassessment stems to align with:\n- In your own words, what does a prior assert?\nknown misconceptions:\n- (none known for this objective)\naccepted sources:\n- https://stat.example.edu/bayes-update | Updating a belief with evidence | worked numeric example, undergraduate level\n\nThis objective is not computational. Leave `code` null.\nCite only from the accepted sources above, by url, in `citations`.\nWrite 2 or more worked examples and between 3 and 6 exercises. Keep review_summary to 80 words or fewer.",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    },
+    "8f918fadecfdec616cc7a3b08410d5c7": {
+      "agent": "author",
+      "output": {
+        "citations": [
+          "https://stat.example.edu/bayes-update"
+        ],
+        "code": null,
+        "exercises": [
+          {
+            "answer": "Any defensible prior with a stated source and a stated sensitivity check.",
+            "bloom": "create",
+            "prompt": "Pick a prior for this problem and defend it in three sentences.",
+            "wrong_answer_feedback": {}
+          },
+          {
+            "answer": "Rerun the update under a second prior and report how far the answer moves.",
+            "bloom": "create",
+            "prompt": "Build a sensitivity check for your prior.",
+            "wrong_answer_feedback": {}
+          },
+          {
+            "answer": "Point at the evidence behind your prior and how far the data moves both.",
+            "bloom": "evaluate",
+            "prompt": "Defend your prior against someone who picked a flatter one.",
+            "wrong_answer_feedback": {}
+          }
+        ],
+        "explainer": "Choosing a prior is a claim you have to defend, not a formality.",
+        "review_summary": "A prior is a belief before data. A likelihood says how well the data fits each belief. Multiply, then renormalise, and you have the posterior. Check the base rate before you trust a strong-looking result.",
+        "worked_examples": [
+          "Worked example 1. Write the numbers down, then apply the rule step by step.",
+          "Worked example 2. Same rule, harder numbers, and one trap on the way through."
+        ]
+      },
+      "prompt": "objective_id: prior_choice\ntitle: Choose and defend a prior\ndescription: Pick a prior for a stated problem and defend the choice.\nbloom: create\ndifficulty: 4 (1 easiest, 5 hardest)\nest_minutes: 35\nexercise type required by this bloom level: build_and_defend\nassessment stems to align with:\n- Pick a prior for this problem and defend it.\nknown misconceptions:\n- prior_is_a_guess: wrong model: A prior is just a guess, so it does not matter what you pick. | diagnostic: You treat the prior as decoration rather than as a claim the data has to move.\naccepted sources:\n- https://stat.example.edu/bayes-update | Updating a belief with evidence | worked numeric example, undergraduate level\n\nThis objective is not computational. Leave `code` null.\nCite only from the accepted sources above, by url, in `citations`.\nWrite 2 or more worked examples and between 3 and 6 exercises. Keep review_summary to 80 words or fewer.",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    },
+    "94f6ea2540dec478096886de7aedc7f5": {
+      "agent": "author",
+      "output": {
+        "citations": [
+          "https://invented.example.org/paper-that-does-not-exist"
+        ],
+        "code": null,
+        "exercises": [
+          {
+            "answer": "The one whose result is far less likely under the rival hypothesis.",
+            "bloom": "analyze",
+            "prompt": "Two studies disagree. Which should move you further, and why?",
+            "wrong_answer_feedback": {
+              "The bigger sample always wins.": "You are counting rows instead of weighing how well each hypothesis predicts the result."
+            }
+          },
+          {
+            "answer": "When both hypotheses predict the same result equally well.",
+            "bloom": "analyze",
+            "prompt": "Name a case where a large study should move you very little.",
+            "wrong_answer_feedback": {}
+          },
+          {
+            "answer": "It confuses a tail probability with a posterior belief.",
+            "bloom": "evaluate",
+            "prompt": "Diagnose this claim: 'p < 0.05, so the hypothesis is true.'",
+            "wrong_answer_feedback": {}
+          }
+        ],
+        "explainer": "Evidence moves a belief in proportion to how much better it fits one hypothesis than another.",
+        "review_summary": "A prior is a belief before data. A likelihood says how well the data fits each belief. Multiply, then renormalise, and you have the posterior. Check the base rate before you trust a strong-looking result.",
+        "worked_examples": [
+          "Worked example 1. Write the numbers down, then apply the rule step by step.",
+          "Worked example 2. Same rule, harder numbers, and one trap on the way through."
+        ]
+      },
+      "prompt": "objective_id: evidence_weight\ntitle: Judge how much a piece of evidence should move a belief\ndescription: Weigh evidence quality and decide how far a belief should shift.\nbloom: analyze\ndifficulty: 4 (1 easiest, 5 hardest)\nest_minutes: 30\nexercise type required by this bloom level: diagnosis\nassessment stems to align with:\n- Which of these two studies should move you further, and why?\nknown misconceptions:\n- (none known for this objective)\naccepted sources:\n- (none accepted; you have no source to cite)\n\nThis objective is not computational. Leave `code` null.\nThere are no accepted sources. Leave `citations` empty, and state plainly in the explainer that nothing here is cited and the specifics are unverified. Do not invent a source.\nWrite 2 or more worked examples and between 3 and 6 exercises. Keep review_summary to 80 words or fewer.",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    },
+    "fab99aa2a829fbe764275c66d5a907de": {
+      "agent": "author",
+      "output": {
+        "citations": [
+          "https://stat.example.edu/bayes-update",
+          "https://invented.example.org/paper-that-does-not-exist"
+        ],
+        "code": "prior = 0.01\nsensitivity, false_positive = 0.95, 0.05\njoint = prior * sensitivity\nposterior = joint / (joint + (1 - prior) * false_positive)\nprint(round(posterior, 3))  # 0.161\n",
+        "exercises": [
+          {
+            "answer": "About 16%.",
+            "bloom": "apply",
+            "prompt": "The prior is 1% and the test is 95% accurate. Compute the posterior.",
+            "wrong_answer_feedback": {
+              "95%": "The test is 95% accurate, so a positive result means a 95% chance of disease. That reads the likelihood as the posterior and drops the prior."
+            }
+          },
+          {
+            "answer": "About 68%.",
+            "bloom": "apply",
+            "prompt": "Raise the prior to 10% and recompute.",
+            "wrong_answer_feedback": {
+              "95%": "You are still ignoring the base rate."
+            }
+          },
+          {
+            "answer": "Posterior is proportional to prior times likelihood.",
+            "bloom": "remember",
+            "prompt": "State the rule you used in one sentence.",
+            "wrong_answer_feedback": {}
+          }
+        ],
+        "explainer": "A posterior is what you believe after the evidence lands. You start from the prior, weigh the likelihood, and renormalise.",
+        "review_summary": "A prior is a belief before data. A likelihood says how well the data fits each belief. Multiply, then renormalise, and you have the posterior. Check the base rate before you trust a strong-looking result.",
+        "worked_examples": [
+          "Worked example 1. Write the numbers down, then apply the rule step by step.",
+          "Worked example 2. Same rule, harder numbers, and one trap on the way through."
+        ]
+      },
+      "prompt": "objective_id: bayes_update\ntitle: Calculate a posterior from a prior and a likelihood\ndescription: Given a prior probability and a likelihood, compute the posterior probability using Bayes' theorem.\nbloom: apply\ndifficulty: 3 (1 easiest, 5 hardest)\nest_minutes: 25\nexercise type required by this bloom level: computation\nassessment stems to align with:\n- Compute the posterior given a 1% prior and a 95% true positive rate.\nknown misconceptions:\n- ignores_base_rate: wrong model: The test is 95% accurate, so a positive result means a 95% chance of disease. | diagnostic: You read the likelihood as the posterior and dropped the prior entirely.\naccepted sources:\n- https://stat.example.edu/bayes-update | Updating a belief with evidence | worked numeric example, undergraduate level\n- https://docs.example.org/probability/basics | Probability basics | definitions and notation\n\nThis objective is computational. Include a short runnable Python snippet in `code` that a learner can paste and run, with the expected output in a comment.\nCite only from the accepted sources above, by url, in `citations`.\nWrite 2 or more worked examples and between 3 and 6 exercises. Keep review_summary to 80 words or fewer.",
+      "usage": {
+        "request_tokens": 0,
+        "response_tokens": 0
+      }
+    }
+  },
+  "version": 1
+}
