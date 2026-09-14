@@ -75,6 +75,23 @@ def version() -> None:
     console.print(f"home: {settings.home}")
     console.print(f"database: {settings.sqlalchemy_url}")
 
+    # Credentials: report presence only, never a value.
+    import os
+
+    from the_oracle.config import DOTENV_FILES
+
+    if DOTENV_FILES:
+        console.print("env files: " + ", ".join(str(p) for p in DOTENV_FILES))
+    else:
+        console.print("env files: [dim]none found[/dim]")
+
+    watched = ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "SERPER_API_KEY", "VOYAGE_API_KEY")
+    found = [name for name in watched if os.environ.get(name)]
+    missing = [name for name in watched if not os.environ.get(name)]
+    console.print("keys set: " + (", ".join(found) if found else "[dim]none[/dim]"))
+    if missing:
+        console.print(f"keys missing: [dim]{', '.join(missing)}[/dim]")
+
 
 @domain_app.command("list")
 def domain_list() -> None:

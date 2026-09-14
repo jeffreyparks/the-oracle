@@ -2,12 +2,51 @@
 
 from __future__ import annotations
 
+import os
 from enum import StrEnum
 from functools import lru_cache
 from pathlib import Path
 
+from dotenv import load_dotenv
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def _load_dotenv_files() -> list[Path]:
+    """Load provider credentials from .env into the real process environment.
+
+    pydantic-settings only maps ``ORACLE_``-prefixed variables onto Settings
+    fields. Model SDKs read their own keys straight from ``os.environ``
+    (``ANTHROPIC_API_KEY``, ``OPENAI_API_KEY``, ``SERPER_API_KEY``, ...), so a
+    key sitting in a .env file would otherwise be invisible to them.
+
+    Search order, first file wins per key, and a real environment variable
+    always beats a file:
+
+    1. ``$ORACLE_HOME/.env`` (or the default home), so a deployed install keeps
+       its secrets beside its data.
+    2. ``.env`` in the current directory and each parent, so a checkout works
+       from any subdirectory.
+    """
+    loaded: list[Path] = []
+    candidates: list[Path] = []
+
+    home_raw = os.environ.get("ORACLE_HOME")
+    home = Path(home_raw).expanduser() if home_raw else Path.home() / ".the-oracle"
+    candidates.append(home / ".env")
+
+    here = Path.cwd().resolve()
+    candidates.extend(parent / ".env" for parent in (here, *here.parents))
+
+    for path in candidates:
+        if path.is_file():
+            load_dotenv(path, override=False)
+            loaded.append(path)
+    return loaded
+
+
+#: Populated at import time. ``the-oracle version`` reports it.
+DOTENV_FILES: list[Path] = _load_dotenv_files()
 
 
 class Task(StrEnum):
