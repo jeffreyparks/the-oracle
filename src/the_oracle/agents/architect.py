@@ -376,6 +376,28 @@ async def draft_domain_async(
     return result.output
 
 
+def draft_objectives_as_objectives(draft: DraftDomain) -> list["Objective"]:
+    """Provisional :class:`Objective` bodies for a draft, ids not yet settled.
+
+    Shared by the dedupe pass and by the Critic adapter, which needs the same
+    candidate bodies to judge a borderline match.
+    """
+    return [
+        Objective(
+            id=f"draft_{slugify(o.title)}",
+            version=1,
+            title=o.title,
+            description=o.description,
+            bloom=o.bloom,  # type: ignore[arg-type]
+            difficulty=o.difficulty,
+            est_minutes=o.est_minutes,
+            assessment_stems=o.assessment_stems,
+            tags=o.tags,
+        )
+        for o in draft.objectives
+    ]
+
+
 def plan_domain(
     draft: DraftDomain,
     interview: Interview,
@@ -397,20 +419,7 @@ def plan_domain(
 
     dedupe = _load_dedupe()
     existing = list(library.all_objectives())
-    candidates = [
-        Objective(
-            id=f"draft_{slugify(o.title)}",
-            version=1,
-            title=o.title,
-            description=o.description,
-            bloom=o.bloom,  # type: ignore[arg-type]
-            difficulty=o.difficulty,
-            est_minutes=o.est_minutes,
-            assessment_stems=o.assessment_stems,
-            tags=o.tags,
-        )
-        for o in draft.objectives
-    ]
+    candidates = draft_objectives_as_objectives(draft)
     matches = list(dedupe.match_all(candidates, existing, embedder=embedder))
     resolution: dict[str, str | None] = dict(dedupe.resolve(matches, judge=judge))
 

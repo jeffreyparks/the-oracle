@@ -254,3 +254,65 @@ the same skill as practitioner-level calibration — but it means the live path
 exercised `mint` only. Reuse is proven in unit tests (1.000 on a near-duplicate),
 not yet against a real model. A second generated domain that deliberately
 overlaps the seed pack would close this gap.
+
+
+---
+
+# Closing the reuse gap — what the live runs actually revealed
+
+Four live runs against an overlapping topic ("evaluate whether a probabilistic
+forecast is calibrated and sharp", practitioner depth, background stating
+existing Bayesian/MCMC skill). Reuse never happened. Three causes, in order of
+discovery.
+
+## Cause 1 (bug, fixed): the depth penalty hid true duplicates from the Critic
+
+`decide()` banded on *cosine minus depth penalty*. That pushed genuine
+duplicates below the adjudicate bar, so the Critic never saw them.
+
+Measured: "Design a rolling-origin backtest" scored **0.858 raw** against
+`ts_backtesting`, but **0.752** after the penalty, landing in MINT.
+
+Fixed: raw cosine chooses the band; a depth gap **downgrades** REUSE to
+ADJUDICATE rather than suppressing the match. Effect on the same 7 candidates:
+adjudications went from **0 to 5**.
+
+## Cause 2 (bug, fixed): the Critic was never called
+
+`commands/domain_add.py` called `plan_domain(draft, interview)` with no judge.
+`resolve()` splits every middle-band match when `judge is None`, so the Critic
+was built, unit-tested, and **completely unwired** — the same failure mode as the
+stale `domain add` stub in Phase 0. `judge_fn` already existed as the adapter.
+
+Wired in the command, not defaulted inside `plan_domain`, so library callers and
+offline tests never make a live model call unless they ask for one.
+
+## Cause 3 (not a bug): the Architect drafts blind
+
+With both bugs fixed, a candidate scored **0.96** against `ts_backtesting` and
+the Critic still refused, with a defensible argument:
+
+> "The Bloom level differs (apply vs evaluate)... The candidate asks learners to
+> construct a scheme, while the existing objective asks them to evaluate
+> forecasts... A learner who can design a rolling-origin scheme may not yet judge
+> reporting practices, and vice versa."
+
+That is the bias-to-split policy working exactly as specified. It is also a
+**design gap**: the Architect drafts with no knowledge of the existing library,
+so it invents parallel objectives at slightly different Bloom levels, and
+post-hoc dedupe is left to reconcile them. It cannot, and should not, merge
+across a genuine Bloom gap.
+
+Consequence if left alone: the library bloats with near-parallel objectives and
+**mastery stops transferring**, which is the entire premise of the shared
+library.
+
+### Proposed fix (not yet built): retrieval-augmented drafting
+
+Before drafting, embed the interview goal and `must_cover` terms, retrieve the
+top ~20 nearest library objectives, and put them in the Architect's prompt with
+an instruction to reuse an existing objective verbatim by id where it already
+covers a needed skill, and to draft only what is genuinely missing.
+
+Prevention beats reconciliation: dedupe stops being the primary mechanism and
+becomes the safety net it was designed to be.

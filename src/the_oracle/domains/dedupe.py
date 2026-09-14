@@ -178,15 +178,40 @@ def similarity(
     vector_a: Sequence[float],
     vector_b: Sequence[float],
 ) -> float:
-    """Guarded similarity: cosine minus the depth penalty, floored at -1."""
+    """Guarded similarity: cosine minus the depth penalty, floored at -1.
+
+    Kept for callers that want a single blended number. Banding uses
+    :func:`decide` with the raw cosine and the penalty passed separately.
+    """
     return max(-1.0, cosine(vector_a, vector_b) - depth_penalty(a, b))
 
 
-def decide(score: float, thresholds: tuple[float, float]) -> Decision:
-    """Map one score onto a band."""
+#: A depth gap this large or bigger blocks a silent reuse and asks the Critic.
+DEPTH_DOWNGRADE_EPSILON = 0.02
+
+
+def decide(
+    score: float,
+    thresholds: tuple[float, float],
+    penalty: float = 0.0,
+) -> Decision:
+    """Map one similarity onto a band.
+
+    ``score`` is the RAW cosine. The depth penalty is applied as a *downgrade*,
+    not as a subtraction before banding.
+
+    Why: subtracting the penalty first pushed genuine duplicates below the
+    adjudicate threshold, so the Critic never saw them. Measured against the
+    seed library, "Design a rolling-origin backtest" scored 0.858 raw against an
+    existing objective that teaches exactly that, but 0.752 after the penalty —
+    a silent false split, which is the failure the Critic exists to prevent.
+
+    So: raw similarity chooses the band, and a depth gap can only make the
+    decision more cautious, never less visible.
+    """
     reuse, adjudicate = thresholds
     if score >= reuse:
-        return Decision.REUSE
+        return Decision.REUSE if penalty < DEPTH_DOWNGRADE_EPSILON else Decision.ADJUDICATE
     if score >= adjudicate:
         return Decision.ADJUDICATE
     return Decision.MINT
@@ -244,15 +269,23 @@ def match_all(
 
     matches: list[Match] = []
     for candidate, vector in zip(candidates, candidate_vectors, strict=True):
-        scored = sorted(
+        # Rank on RAW cosine, and carry the depth penalty alongside it so the
+        # banding step can downgrade rather than hide a strong match.
+        scored_full = sorted(
             (
-                (obj.id, similarity(candidate, obj, vector, other))
+                (obj.id, cosine(vector, other), depth_penalty(candidate, obj))
                 for obj, other in zip(existing, existing_vectors, strict=True)
             ),
-            key=lambda pair: (-pair[1], pair[0]),
+            key=lambda triple: (-triple[1], triple[0]),
         )
-        best_id, best_score = scored[0] if scored else (None, 0.0)
-        decision = decide(best_score, thresholds) if scored else Decision.MINT
+        scored = [(oid, raw) for oid, raw, _ in scored_full]
+        if scored_full:
+            best_id, best_score, best_penalty = scored_full[0]
+        else:
+            best_id, best_score, best_penalty = None, 0.0, 0.0
+        decision = (
+            decide(best_score, thresholds, best_penalty) if scored_full else Decision.MINT
+        )
         match = Match(
             candidate_title=candidate.title,
             decision=decision,

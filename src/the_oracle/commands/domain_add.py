@@ -182,8 +182,23 @@ def domain_add(
         raise typer.Exit(code=1) from exc
 
     console.print("Matching against the objectives you already have.")
+
+    # Wire the Critic in. Without a judge every middle-band match splits, so the
+    # Critic would exist, be tested, and never run: a live overlapping domain
+    # scored 0.94 against an existing objective and still minted a duplicate.
+    # Built here rather than defaulted inside plan_domain, so library callers
+    # and offline tests stay free of live model calls unless they ask for one.
+    from the_oracle.agents.architect import draft_objectives_as_objectives
+    from the_oracle.agents.critic import judge_fn
+
     try:
-        plan = plan_domain(draft, interview)
+        judge = judge_fn(draft_objectives_as_objectives(draft))
+    except Exception as exc:  # noqa: BLE001 - never block a build on the judge
+        console.print(f"[yellow]No sameness judge available ({exc}); borderline matches will split.[/yellow]")
+        judge = None
+
+    try:
+        plan = plan_domain(draft, interview, judge=judge)
     except PackValidationError as exc:
         console.print("[red]The draft is not a valid curriculum, so nothing was written.[/red]")
         for problem in exc.problems:
