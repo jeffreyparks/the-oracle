@@ -40,9 +40,13 @@ from the_oracle.commands import domain_add as _domain_add_cmd  # noqa: E402
 from the_oracle.commands import learner as _learner_cmd  # noqa: E402
 from the_oracle.commands import plan as _plan_cmd  # noqa: E402
 from the_oracle.commands import resources as _resources_cmd  # noqa: E402
+from the_oracle.commands import review as _review_cmd  # noqa: E402
+from the_oracle.commands import study as _study_cmd  # noqa: E402
 
 app.command("assess", help="Run the adaptive diagnostic for a domain.")(_assess_cmd.assess)
 app.command("resources", help="Fill the corpus for a module.")(_resources_cmd.resources)
+app.command("study", help="Run a study session.")(_study_cmd.study)
+app.command("review", help="Work through everything that is due.")(_review_cmd.review)
 app.command("plan", help="Build or refresh the syllabus.")(_plan_cmd.plan)
 domain_app.command("add", help="Create a new domain pack from an interview.")(
     _domain_add_cmd.domain_add
@@ -197,18 +201,6 @@ def rebuild(
     table.add_row("derived rows", str(report.rows_written))
     table.add_row("tables cleared", ", ".join(report.tables_cleared) or "-")
     console.print(table)
-
-
-@app.command()
-def study(domain_id: Annotated[str, typer.Argument()] = "") -> None:
-    """Run a study session."""
-    _not_built("study", "Phase 4 (Study loop)")
-
-
-@app.command()
-def review() -> None:
-    """Work through everything that is due."""
-    _not_built("review", "Phase 4 (Study loop)")
 
 
 @app.command()
