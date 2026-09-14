@@ -96,8 +96,53 @@ class DraftObjective(BaseModel):
     bloom: str
     difficulty: int
     est_minutes: int
-    assessment_stems: list[str] = Field(default_factory=list)
-    tags: list[str] = Field(default_factory=list)
+    assessment_stems: list[str] = Field(
+        default_factory=list,
+        description="Two or three stems that reveal mastery, not recall.",
+    )
+    tags: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Three to six short topic keywords. Required: they are how this "
+            "objective is later matched against the shared library, so an "
+            "objective without tags is harder to reuse."
+        ),
+    )
+
+
+class DraftModule(BaseModel):
+    """An ordered group of objectives, referenced by title."""
+
+    title: str
+    goal: str = Field(description="One sentence: what the learner can do after it.")
+    objectives: list[str] = Field(
+        default_factory=list, description="Objective TITLES, in teaching order."
+    )
+
+
+class DraftMisconception(BaseModel):
+    """A named wrong mental model the tutor must be able to detect.
+
+    Typed rather than a free dict. A live run against the model produced empty
+    ``wrong_model`` strings for every misconception, because an untyped
+    ``dict[str, Any]`` puts no required keys in the JSON schema. The model only
+    reliably fills fields the schema demands.
+    """
+
+    wrong_model: str = Field(
+        min_length=10,
+        description=(
+            "The wrong belief stated plainly, in the learner's own voice. "
+            "For example 'a 30% chance means it rains for 30% of the day'."
+        ),
+    )
+    objectives: list[str] = Field(
+        default_factory=list, description="Objective TITLES this damages."
+    )
+    diagnostic: str = Field(
+        min_length=10,
+        description="One question whose wrong answer exposes this belief.",
+    )
 
 
 class DraftDomain(BaseModel):
@@ -107,8 +152,8 @@ class DraftDomain(BaseModel):
     description: str
     objectives: list[DraftObjective] = Field(default_factory=list)
     edges: list[tuple[str, str]] = Field(default_factory=list)
-    modules: list[dict[str, Any]] = Field(default_factory=list)
-    misconceptions: list[dict[str, Any]] = Field(default_factory=list)
+    modules: list[DraftModule] = Field(default_factory=list)
+    misconceptions: list[DraftMisconception] = Field(default_factory=list)
 
     def titles(self) -> list[str]:
         return [o.title for o in self.objectives]
@@ -485,17 +530,17 @@ def _draft_problems(draft: DraftDomain) -> list[str]:
         if a == b:
             problems.append(f"draft: objective {a!r} is its own prerequisite")
     for module in draft.modules:
-        for title in module.get("objectives", []):
+        for title in module.objectives:
             if title not in known:
                 problems.append(
-                    f"draft: module {module.get('id', module.get('title'))!r} lists "
+                    f"draft: module {module.title!r} lists "
                     f"unknown objective title {title!r}"
                 )
     for mis in draft.misconceptions:
-        for title in mis.get("objectives", []):
+        for title in mis.objectives:
             if title not in known:
                 problems.append(
-                    f"draft: misconception {mis.get('id', mis.get('wrong_model'))!r} "
+                    f"draft: misconception {mis.wrong_model[:60]!r} "
                     f"references unknown objective title {title!r}"
                 )
     return problems
@@ -506,28 +551,41 @@ def _assemble(draft: DraftDomain, ids: dict[str, str], domain_id: str) -> Domain
     modules: list[Module] = []
     placed: set[str] = set()
     for index, module in enumerate(draft.modules, start=1):
-        objective_ids = [ids[t] for t in module.get("objectives", []) if t in ids]
+        objective_ids = [ids[t] for t in module.objectives if t in ids]
         objective_ids = [oid for oid in dict.fromkeys(objective_ids) if oid not in placed]
         placed.update(objective_ids)
-        raw_id = str(module.get("id") or module.get("title") or f"module {index}")
+        raw_id = module.title or f"module {index}"
         modules.append(
             Module(
                 id=f"m{index:02d}_{slugify(raw_id)}",
-                title=str(module.get("title") or raw_id),
-                goal=str(module.get("goal") or ""),
+                title=module.title or raw_id,
+                goal=module.goal,
                 objectives=objective_ids,
             )
         )
 
     misconceptions: list[Misconception] = []
+    used_mis_ids: set[str] = set()
     for index, mis in enumerate(draft.misconceptions, start=1):
-        raw_id = str(mis.get("id") or mis.get("wrong_model") or f"misconception {index}")
+        # Id comes from the belief itself, so it is readable in a pack file.
+        # Two beliefs often share an opening clause ("a 30% chance of rain
+        # means..."), so the first candidate is not guaranteed unique.
+        raw_id = " ".join(mis.wrong_model.split()[:6]) or f"misconception {index}"
+        candidate = f"mc_{slugify(raw_id)}"
+        if candidate in used_mis_ids:
+            longer = " ".join(mis.wrong_model.split()[:10])
+            candidate = f"mc_{slugify(longer)}"
+        base, suffix = candidate, 2
+        while candidate in used_mis_ids:
+            candidate = f"{base}_{suffix}"
+            suffix += 1
+        used_mis_ids.add(candidate)
         misconceptions.append(
             Misconception(
-                id=f"mc_{slugify(raw_id)}",
-                wrong_model=str(mis.get("wrong_model") or ""),
-                objectives=[ids[t] for t in mis.get("objectives", []) if t in ids],
-                diagnostic=str(mis.get("diagnostic") or ""),
+                id=candidate,
+                wrong_model=mis.wrong_model,
+                objectives=[ids[t] for t in mis.objectives if t in ids],
+                diagnostic=mis.diagnostic,
             )
         )
 

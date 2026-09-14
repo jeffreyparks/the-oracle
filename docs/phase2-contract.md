@@ -197,3 +197,60 @@ stay absolute, not relative.
    true test of whether a generated curriculum is worth studying.
 3. **Planner and syllabus are not wired to checkpoints in the `Syllabus` object**
    (the contract froze its fields); call `build_checkpoints` separately.
+
+
+---
+
+# Live `domain add` — first real model run
+
+Run: survey depth, 1 h/week, 1 week, scratch `~/.the-oracle-live`.
+Model: `anthropic:claude-sonnet-4-5`. ~40 s and a few cents per run.
+
+Three bugs found that **every offline test had passed**. This is why hand-written
+cassettes prove plumbing, not correctness.
+
+## 1. `'RunUsage' object is not callable`
+
+`agents/base.py` called `run.usage()`. pydantic-ai has shipped `usage` as both a
+method and a property. Fixed with `_unwrap_usage` / `_run_usage`, which accept
+either shape. A cassette can never catch this: it fabricates the run object.
+
+## 2. Every misconception had an empty `wrong_model`
+
+Root cause: `DraftDomain.modules` and `.misconceptions` were
+`list[dict[str, Any]]`. An untyped dict puts **no required keys in the JSON
+schema**, so the model simply omitted the field. Objective `tags` came back empty
+for the same reason — declared but never described.
+
+Fix: real `DraftModule` and `DraftMisconception` models with `min_length`
+constraints and field descriptions. The lesson generalises: **the model fills
+what the schema demands, and skips what it does not.** Never accept a free dict
+from a structured-output agent.
+
+Before: `wrong_model: ''` for all five.
+After: `"A 30% chance of rain means it will rain for 30% of the time period."`
+with a matching diagnostic question and objective refs.
+
+## 3. Duplicate misconception ids
+
+Ids were minted from the first six words of the belief. Two beliefs opened
+identically ("a 30% chance of rain means...") and collided, silently collapsing
+two distinct wrong models into one. Fixed by widening then numbering, and a new
+**rule 6a** in `registry.py` rejects duplicate misconception ids at load time.
+The validator should have caught this and did not.
+
+## Result
+
+Two domains now coexist in one library: the 70-objective seed pack and a
+5-objective generated pack. Quality of the generated content is good — stems are
+diagnose-and-explain, not recall, and the misconceptions are ones a real learner
+holds.
+
+## Still unproven
+
+**Live reuse.** All five objectives scored 0.60-0.70 against the library and were
+minted. That is almost certainly correct — consumer-level forecast reading is not
+the same skill as practitioner-level calibration — but it means the live path
+exercised `mint` only. Reuse is proven in unit tests (1.000 on a near-duplicate),
+not yet against a real model. A second generated domain that deliberately
+overlaps the seed pack would close this gap.

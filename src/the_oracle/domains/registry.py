@@ -120,6 +120,15 @@ def _check(domain: Domain) -> tuple[list[str], dict[str, Objective]]:
                 f"prerequisite {edge.from_id!r}"
             )
 
+    # Rule 6a: misconception ids are unique. A duplicate id silently collapses
+    # two distinct wrong models into one, so the tutor could never tell the
+    # learner which one they hold.
+    seen_mis: set[str] = set()
+    for mis in domain.misconceptions:
+        if mis.id in seen_mis:
+            problems.append(f"rule6: duplicate misconception id {mis.id!r}")
+        seen_mis.add(mis.id)
+
     # Rule 6: every misconception objective ref resolves.
     for mis in domain.misconceptions:
         for oid in mis.objectives:

@@ -115,7 +115,7 @@ class Cassette:
     ) -> tuple[dict[str, Any], str]:
         if self.record:
             run = await agent.pydantic_agent().run(prompt)
-            usage = Usage.from_run(run.usage())
+            usage = Usage.from_run(getattr(run, "usage", None))
             self.put(name, prompt, run.output.model_dump(mode="json"), usage)
             return self.entries[key_for(name, prompt)], "live"
         if self.synthesize is not None:

@@ -59,10 +59,28 @@ class Usage:
     @classmethod
     def from_run(cls, run_usage: Any) -> "Usage":
         """Read a Pydantic AI ``RunUsage`` without depending on its exact shape."""
+        run_usage = _unwrap_usage(run_usage)
         return cls(
             request_tokens=int(getattr(run_usage, "input_tokens", 0) or 0),
             response_tokens=int(getattr(run_usage, "output_tokens", 0) or 0),
         )
+
+
+def _unwrap_usage(run_usage: Any) -> Any:
+    """Accept a ``RunUsage`` or a zero-arg callable returning one.
+
+    pydantic-ai has shipped ``run.usage`` both as a method and as a property.
+    Calling the wrong one raises ``'RunUsage' object is not callable``, which is
+    invisible to recorded cassettes and only appears against a live model.
+    """
+    if callable(run_usage) and not hasattr(run_usage, "input_tokens"):
+        return run_usage()
+    return run_usage
+
+
+def _run_usage(run: Any) -> Any:
+    """Return the usage object for a completed run, method or property."""
+    return _unwrap_usage(getattr(run, "usage", None))
 
 
 @dataclass(frozen=True, slots=True)
@@ -225,4 +243,4 @@ class Agent(ABC, Generic[In, Out]):
     async def _run_llm(self, prompt: str) -> tuple[Out, Usage]:
         """Helper: one Pydantic AI call, typed output, usage extracted."""
         run = await self.pydantic_agent().run(prompt)
-        return run.output, Usage.from_run(run.usage())
+        return run.output, Usage.from_run(_run_usage(run))
