@@ -80,3 +80,64 @@ def delete(
 
 
 __all__ = ["app"]
+
+
+# ---------------------------------------------------------------------------
+# Nudge consent
+# ---------------------------------------------------------------------------
+#
+# The day-14 nudge tells the learner to run ``the-oracle learner pause``. That
+# command did not exist, and nothing in the product could set
+# ``preferences["nudges"]``, so the documented one-word opt-out was unreachable.
+# An opt-out you cannot reach is not an opt-out.
+
+
+def _set_nudges(learner_id: str, value: str) -> None:
+    """Write the nudge preference and record it in the log."""
+    from the_oracle.store.db import get_engine, session_scope
+    from the_oracle.store.events import EventKind, EventLog
+    from the_oracle.store.models import Learner
+
+    engine = get_engine()
+    with session_scope(engine) as session:
+        learner = session.get(Learner, learner_id)
+        if learner is None:
+            learner = Learner(id=learner_id)
+            session.add(learner)
+        prefs = dict(learner.preferences or {})
+        prefs["nudges"] = value
+        learner.preferences = prefs
+        session.add(learner)
+
+    EventLog(engine).append(
+        EventKind.PREFERENCES_SET, learner_id, {"nudges": value}
+    )
+
+
+@app.command("pause")
+def pause(
+    learner_id: Annotated[
+        str | None, typer.Argument(help="Defaults to the current learner.")
+    ] = None,
+) -> None:
+    """Stop all reminders. Progress is kept."""
+    from the_oracle.context import LearnerContext
+
+    target = learner_id or LearnerContext.resolve().learner_id
+    _set_nudges(target, "off")
+    console.print("Reminders are off. Your progress is untouched.")
+    console.print("Start again whenever you want with [bold]the-oracle review[/bold].")
+
+
+@app.command("resume")
+def resume(
+    learner_id: Annotated[
+        str | None, typer.Argument(help="Defaults to the current learner.")
+    ] = None,
+) -> None:
+    """Turn reminders back on."""
+    from the_oracle.context import LearnerContext
+
+    target = learner_id or LearnerContext.resolve().learner_id
+    _set_nudges(target, "on")
+    console.print("Reminders are back on.")

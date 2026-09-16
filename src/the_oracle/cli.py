@@ -39,6 +39,8 @@ from the_oracle.commands import assess as _assess_cmd  # noqa: E402
 from the_oracle.commands import domain_add as _domain_add_cmd  # noqa: E402
 from the_oracle.commands import learner as _learner_cmd  # noqa: E402
 from the_oracle.commands import plan as _plan_cmd  # noqa: E402
+from the_oracle.commands import cron as _cron_cmd  # noqa: E402
+from the_oracle.commands import report as _report_cmd  # noqa: E402
 from the_oracle.commands import resources as _resources_cmd  # noqa: E402
 from the_oracle.commands import review as _review_cmd  # noqa: E402
 from the_oracle.commands import study as _study_cmd  # noqa: E402
@@ -47,6 +49,8 @@ app.command("assess", help="Run the adaptive diagnostic for a domain.")(_assess_
 app.command("resources", help="Fill the corpus for a module.")(_resources_cmd.resources)
 app.command("study", help="Run a study session.")(_study_cmd.study)
 app.command("review", help="Work through everything that is due.")(_review_cmd.review)
+app.command("report", help="Print the weekly report.")(_report_cmd.report)
+app.add_typer(_cron_cmd.app, name="cron")
 app.command("plan", help="Build or refresh the syllabus.")(_plan_cmd.plan)
 domain_app.command("add", help="Create a new domain pack from an interview.")(
     _domain_add_cmd.domain_add
@@ -201,12 +205,6 @@ def rebuild(
     table.add_row("derived rows", str(report.rows_written))
     table.add_row("tables cleared", ", ".join(report.tables_cleared) or "-")
     console.print(table)
-
-
-@app.command()
-def report() -> None:
-    """Print the weekly report."""
-    _not_built("report", "Phase 5 (Push me)")
 
 
 if __name__ == "__main__":  # pragma: no cover
