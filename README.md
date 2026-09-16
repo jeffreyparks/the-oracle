@@ -32,14 +32,18 @@ uv run the-oracle version
 
 It reports which keys are set. It never prints their values.
 
-**3. Point it at your data directory**
-
-Domain packs and your database live in `~/.the-oracle` by default. To use the
-Bayesian forecasting pack that ships with this repo:
+**3. Install the starter subject**
 
 ```bash
-export ORACLE_HOME="$PWD/data/packs"
+the-oracle init
 ```
+
+This copies the Bayesian forecasting pack into your data directory,
+`~/.the-oracle`. That directory holds everything personal: your progress, your
+generated subjects, and your database.
+
+Keep it out of the repo. `ORACLE_HOME` overrides the location if you want it
+somewhere else, but never point it at this checkout.
 
 **4. Study**
 
@@ -62,6 +66,20 @@ the-oracle report          # what moved this week, what is fading
 the-oracle cron install    # one crontab line, daily reminder
 ```
 
+
+### Where your data lives
+
+| Path | What | In git? |
+| --- | --- | --- |
+| `~/.the-oracle/objectives/` | Objective library, yours and shipped | no |
+| `~/.the-oracle/domains/` | Your subjects, including generated ones | no |
+| `~/.the-oracle/embeddings/` | Embedding cache, rebuildable | no |
+| `~/.the-oracle/oracle.db` | Progress, evidence log, corpus | no |
+| `data/packs/{objectives,domains}/` | **Seed** content shipped with the repo | yes |
+
+The repo ships seed packs only. `the-oracle init` copies them out; it never
+writes back. Nothing you do while studying touches the checkout.
+
 ---
 
 ## Learning something else
@@ -80,6 +98,7 @@ re-taught** — so related topics start partly complete.
 
 | Command | What it does |
 | --- | --- |
+| `init` | Copy the starter subject into your data directory |
 | `version` | Version, data directory, which keys are set |
 | `domain list` / `show <id>` | What you can learn; modules and prerequisites |
 | `domain add "<goal>"` | Build a new subject from an interview |

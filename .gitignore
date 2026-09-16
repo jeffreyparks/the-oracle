@@ -1,9 +1,24 @@
+# --- Python / tooling ---
 .DS_Store
 __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
 .ruff_cache/
+.env
+
+# --- User and runtime data ---
+# The repo ships SEED content only: data/packs/{objectives,domains}.
+# Everything a run produces belongs in ORACLE_HOME (~/.the-oracle), never here.
 *.db
 *.sqlite3
-.env
+data/**/*.db
+
+# Embedding cache: machine-generated, large, and reproducible. 72 of these were
+# committed by accident before this rule existed.
+data/packs/embeddings/
+**/embeddings/
+
+# A stray ORACLE_HOME pointed at the checkout would drop these here.
+data/packs/learner/
+data/packs/*.json

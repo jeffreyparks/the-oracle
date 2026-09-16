@@ -40,11 +40,13 @@ from the_oracle.commands import domain_add as _domain_add_cmd  # noqa: E402
 from the_oracle.commands import learner as _learner_cmd  # noqa: E402
 from the_oracle.commands import plan as _plan_cmd  # noqa: E402
 from the_oracle.commands import cron as _cron_cmd  # noqa: E402
+from the_oracle.commands import init as _init_cmd  # noqa: E402
 from the_oracle.commands import report as _report_cmd  # noqa: E402
 from the_oracle.commands import resources as _resources_cmd  # noqa: E402
 from the_oracle.commands import review as _review_cmd  # noqa: E402
 from the_oracle.commands import study as _study_cmd  # noqa: E402
 
+app.command("init", help="Copy the seed packs into your data directory.")(_init_cmd.init)
 app.command("assess", help="Run the adaptive diagnostic for a domain.")(_assess_cmd.assess)
 app.command("resources", help="Fill the corpus for a module.")(_resources_cmd.resources)
 app.command("study", help="Run a study session.")(_study_cmd.study)

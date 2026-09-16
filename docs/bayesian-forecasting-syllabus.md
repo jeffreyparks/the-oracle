@@ -1,6 +1,8 @@
 # Bayesian Modeling and Forecasting — Syllabus
 
-*Seed skill graph for The Oracle. Source of truth: `data/skill_graphs/bayesian_forecasting.yaml`.*
+*Seed skill graph for The Oracle. Source of truth: `data/packs/objectives/*.yaml` plus
+`data/packs/domains/bayesian_forecasting.yaml`. (The original monolithic file was
+split in Phase 0 and removed once superseded; it remains in git history.)*
 
 **70 objectives · 10 modules · 15 tracked misconceptions · ~65 hours of study · max prerequisite depth 22**
 
