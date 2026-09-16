@@ -23,6 +23,7 @@ from pydantic_ai import Agent as PydanticAgent
 from sqlalchemy import Engine
 from sqlmodel import Session, select
 
+from the_oracle import telemetry
 from the_oracle.config import Task, get_settings
 from the_oracle.context import LearnerContext
 from the_oracle.store import models
@@ -224,17 +225,32 @@ class Agent(ABC, Generic[In, Out]):
         chokepoint; see PLAN.md section 9.
         """
         key = self.key_for(payload, objective_id)
-        if not force:
-            cached = self.lookup(key)
-            if cached is not None:
-                return cached
+        with telemetry.span(
+            "agent {agent}",
+            agent=self.name,
+            task=str(self.task),
+            model=self._model,
+            objective_id=objective_id or "",
+        ) as active:
+            if not force:
+                cached = self.lookup(key)
+                if cached is not None:
+                    telemetry.set_attributes(active, cached=True, total_tokens=cached.usage.total_tokens)
+                    return cached
 
-        output, usage = await self._run(ctx, payload)
-        result: AgentResult[Out] = AgentResult(
-            output=output, usage=usage, key=key, model=self._model, cached=False
-        )
-        self.record(key, result)
-        return result
+            output, usage = await self._run(ctx, payload)
+            result: AgentResult[Out] = AgentResult(
+                output=output, usage=usage, key=key, model=self._model, cached=False
+            )
+            self.record(key, result)
+            telemetry.set_attributes(
+                active,
+                cached=False,
+                request_tokens=usage.request_tokens,
+                response_tokens=usage.response_tokens,
+                total_tokens=usage.total_tokens,
+            )
+            return result
 
     @abstractmethod
     async def _run(self, ctx: LearnerContext, payload: In) -> tuple[Out, Usage]:

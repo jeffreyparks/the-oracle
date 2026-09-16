@@ -103,6 +103,17 @@ class Settings(BaseSettings):
     learner_token_budget: int = 5_000_000
     """Lifetime ceiling per learner."""
 
+    telemetry: bool = True
+    """Turn Logfire instrumentation on. Nothing leaves the machine without
+    ``LOGFIRE_TOKEN``. ``ORACLE_TELEMETRY=0`` disables it outright."""
+
+    telemetry_service_name: str = "the-oracle"
+    telemetry_environment: str = ""
+    """Free text, e.g. ``dev`` or ``prod``. Empty means unset."""
+
+    telemetry_capture_content: bool = False
+    """Send prompts and completions to Logfire. Off: learner text is private."""
+
     default_session_minutes: int = 25
     max_diagnostic_items: int = 12
     mastery_threshold: float = 0.85

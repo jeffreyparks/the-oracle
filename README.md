@@ -148,6 +148,29 @@ event log, so `oracle rebuild` can recompute your whole profile from scratch.
 bad week, and it leaves out praise it cannot justify.
 
 ---
+
+## Telemetry (optional)
+
+The Oracle can trace itself with [Logfire](https://logfire.pydantic.dev): one
+span per command, one per agent run, plus every model call, HTTP request, and
+SQL query.
+
+```bash
+uv sync --extra telemetry          # install it
+export LOGFIRE_TOKEN=...           # then traces go to your project
+oracle version                     # prints the telemetry state
+```
+
+Rules it follows:
+
+- Off by the default. No token, nothing leaves your machine.
+- Prompts and learner answers are **not** sent. Set
+  `ORACLE_TELEMETRY_CAPTURE_CONTENT=1` if you want them.
+- `ORACLE_TELEMETRY=0` turns instrumentation off completely.
+- Telemetry never breaks a session. A missing or broken Logfire is reported
+  and ignored.
+
+---
 ---
 
 # Architecture
@@ -215,7 +238,8 @@ misconception twice in one session interrupts and re-teaches.
 
 Python 3.13, uv, Pydantic AI 2.x (pinned), SQLModel + SQLite, Typer + Rich,
 httpx + trafilatura, Serper for search, sentence-transformers for dedupe
-embeddings (optional extra; falls back to lexical and says so).
+embeddings (optional extra; falls back to lexical and says so), Logfire for
+tracing (optional extra; no-op without it).
 
 **Not here on purpose:** no daemon, no queue, no web UI, no Postgres, no Docker,
 no vector database. One SQLite file, one directory of YAML, one CLI.

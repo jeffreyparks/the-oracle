@@ -61,6 +61,21 @@ domain_app.command("add", help="Create a new domain pack from an interview.")(
 # `learner` is a genuine group with several commands, so it stays a sub-app.
 app.add_typer(_learner_cmd.app, name="learner")
 
+
+@app.callback()
+def _bootstrap(ctx: typer.Context) -> None:
+    """Run before every command. Sets up telemetry and one span per command."""
+    from contextlib import ExitStack
+
+    from the_oracle import telemetry
+
+    telemetry.configure()
+    stack = ExitStack()
+    stack.enter_context(
+        telemetry.span("cli {command}", command=ctx.invoked_subcommand or "root")
+    )
+    ctx.call_on_close(stack.close)
+
 def _not_built(command: str, phase: str) -> None:
     console.print(
         Panel(
@@ -96,6 +111,10 @@ def version() -> None:
         console.print("env files: " + ", ".join(str(p) for p in DOTENV_FILES))
     else:
         console.print("env files: [dim]none found[/dim]")
+
+    from the_oracle import telemetry
+
+    console.print(f"telemetry: {telemetry.configure().describe()}")
 
     watched = ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "SERPER_API_KEY", "VOYAGE_API_KEY")
     found = [name for name in watched if os.environ.get(name)]

@@ -15,6 +15,7 @@ from sqlalchemy import Engine, event
 from sqlalchemy.pool import StaticPool
 from sqlmodel import Session, SQLModel, create_engine
 
+from the_oracle import telemetry
 from the_oracle.config import Settings, get_settings
 from the_oracle.store import models as _models  # noqa: F401  (registers tables)
 
@@ -46,6 +47,7 @@ def build_engine(url: str, *, echo: bool = False) -> Engine:
                 Path(target).parent.mkdir(parents=True, exist_ok=True)
     engine = create_engine(url, **kwargs)
     _enable_sqlite_fks(engine)
+    telemetry.instrument_engine(engine)
     return engine
 
 
