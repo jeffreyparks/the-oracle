@@ -1,4 +1,4 @@
-"""``the-oracle init`` - copy the seed packs into your data directory.
+"""``oracle init`` - copy the seed packs into your data directory.
 
 The repo ships SEED content under ``data/packs``: objective bodies and domain
 manifests, and nothing else. Your progress, your generated domains, your

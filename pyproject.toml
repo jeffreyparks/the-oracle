@@ -21,6 +21,9 @@ dependencies = [
 ]
 
 [project.scripts]
+# ``oracle`` is the name to type. ``the-oracle`` stays as an alias so older
+# docs, crontab lines, and muscle memory keep working.
+oracle = "the_oracle:main"
 the-oracle = "the_oracle:main"
 
 [project.optional-dependencies]

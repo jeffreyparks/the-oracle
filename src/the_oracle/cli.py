@@ -83,7 +83,7 @@ def _registry():  # type: ignore[no-untyped-def]
 def version() -> None:
     """Print the version and the resolved data directory."""
     settings = get_settings()
-    console.print(f"the-oracle [bold]{__version__}[/bold]")
+    console.print(f"oracle [bold]{__version__}[/bold]")
     console.print(f"home: {settings.home}")
     console.print(f"database: {settings.sqlalchemy_url}")
 

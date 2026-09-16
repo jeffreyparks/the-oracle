@@ -1,4 +1,4 @@
-"""``the-oracle review`` — everything that is due, right now, across domains.
+"""``oracle review`` — everything that is due, right now, across domains.
 
 Mastery is keyed by objective, not by domain, so due work crosses packs. This
 command reads the derived schedule and reports it. It never generates work to
@@ -105,7 +105,7 @@ def review() -> None:
                 Panel(
                     "Nothing is due, and nothing is scheduled yet.\n"
                     "There is no review history to schedule from. Run "
-                    "the-oracle assess <domain> or the-oracle study <domain> first.",
+                    "oracle assess <domain> or the-oracle study <domain> first.",
                     title="nothing due",
                     border_style="cyan",
                 )
@@ -149,7 +149,7 @@ def review() -> None:
     if domains:
         console.print(
             "These are injected into your next session, not done as a separate chore. "
-            "Run: " + "  ".join(f"the-oracle study {d}" for d in domains)
+            "Run: " + "  ".join(f"oracle study {d}" for d in domains)
         )
     else:
         console.print(

@@ -1,4 +1,4 @@
-"""``the-oracle learner`` - export and delete one learner's data.
+"""``oracle learner`` - export and delete one learner's data.
 
 Two commands, both plain. Export answers "what do you hold about me".
 Delete answers "remove it". Delete cannot be undone, and says so once.
@@ -86,7 +86,7 @@ __all__ = ["app"]
 # Nudge consent
 # ---------------------------------------------------------------------------
 #
-# The day-14 nudge tells the learner to run ``the-oracle learner pause``. That
+# The day-14 nudge tells the learner to run ``oracle learner pause``. That
 # command did not exist, and nothing in the product could set
 # ``preferences["nudges"]``, so the documented one-word opt-out was unreachable.
 # An opt-out you cannot reach is not an opt-out.

@@ -580,7 +580,7 @@ def test_review_lists_everything_due_with_its_domain(engine) -> None:
     assert "2 objectives due." in flat
     assert DOMAIN_ID in flat
     assert "0.55" in flat and "0.61" in flat
-    assert f"the-oracle study {DOMAIN_ID}" in flat
+    assert f"oracle study {DOMAIN_ID}" in flat
     assert_voice(result.output)
 
 

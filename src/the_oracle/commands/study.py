@@ -1,4 +1,4 @@
-"""``the-oracle study`` — run one real session.
+"""``oracle study`` — run one real session.
 
 This is the only place a learner hears the Oracle speak, so the voice in
 ``style.py`` is the specification, not a suggestion. Praise names the exact

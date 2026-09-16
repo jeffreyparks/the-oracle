@@ -1,4 +1,4 @@
-"""``the-oracle resources`` - fill the corpus for a module, lazily.
+"""``oracle resources`` - fill the corpus for a module, lazily.
 
 The command is a thin renderer over :mod:`the_oracle.corpus.pipeline`. It makes
 one promise of its own: ``--dry-run`` touches no network and no model. That is

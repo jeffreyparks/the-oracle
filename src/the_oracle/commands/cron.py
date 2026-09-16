@@ -1,4 +1,4 @@
-"""``the-oracle cron`` — the whole scheduler, in one crontab line.
+"""``oracle cron`` — the whole scheduler, in one crontab line.
 
 There is no daemon. ``cron run`` is the single entry point the line calls; it
 computes due work, decides whether a nudge is owed, and delivers it. The other
@@ -73,7 +73,7 @@ def line(
     console.print()
     console.print(
         "[dim]That is the whole scheduler. Add it yourself, or run "
-        "the-oracle cron install.[/dim]"
+        "oracle cron install.[/dim]"
     )
 
 

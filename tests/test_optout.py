@@ -69,7 +69,7 @@ def test_every_command_named_in_a_nudge_template_exists() -> None:
     from the_oracle.nudge import templates
 
     text = " ".join(str(v) for v in templates.TEMPLATES.values())
-    named = set(re.findall(r"the-oracle ([a-z]+(?: [a-z]+)?)", text))
+    named = set(re.findall(r"\boracle ([a-z]+(?: [a-z]+)?)", text))
     assert named, "no commands referenced; check the template module"
 
     runner = CliRunner()

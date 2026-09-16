@@ -1,4 +1,4 @@
-"""``the-oracle report`` — the weekly report.
+"""``oracle report`` — the weekly report.
 
 One model call a week, and only when there is something to write about. A week
 with no activity is rendered from the facts alone: no key, no network, no

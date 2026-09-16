@@ -1,4 +1,4 @@
-"""``the-oracle plan`` - show the syllabus for a domain, honestly costed.
+"""``oracle plan`` - show the syllabus for a domain, honestly costed.
 
 The planner is deterministic, so this command is a renderer and nothing else.
 It never rounds the total down to make the plan look friendlier. If the real
@@ -31,7 +31,7 @@ app = typer.Typer(
 
 Same shape as ``commands/assess.py``. One caveat the orchestrator should know:
 a Typer group parses options before the positional argument, so with
-``add_typer`` the working form is ``the-oracle plan --hours-per-week 2 demo``.
+``add_typer`` the working form is ``oracle plan --hours-per-week 2 demo``.
 If you want options after the id, register the function directly instead:
 ``app.command("plan")(_plan_cmd.plan)``. Both entry points are exported.
 """

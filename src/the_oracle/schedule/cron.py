@@ -1,7 +1,7 @@
 """The one crontab line, and the safe way to install it.
 
 There is no scheduler process here. The whole "daemon" is a single line in the
-user's crontab that runs ``the-oracle cron run`` once a day. Everything in this
+user's crontab that runs ``oracle cron run`` once a day. Everything in this
 module is about editing that one line honestly:
 
 * the exact change is computed before anything is written;
@@ -24,6 +24,9 @@ from pathlib import Path
 from typing import Protocol, runtime_checkable
 
 #: Every line we manage ends with this. Nothing else is ever touched.
+#: Kept as ``the-oracle`` even though the command is now ``oracle``: this string
+#: identifies lines already installed in a user's crontab, and changing it would
+#: orphan them so ``cron uninstall`` could never find them again.
 MARKER: str = "# the-oracle:nudge"
 
 #: What the crontab line runs. Kept here so tests and docs cannot drift.
@@ -123,14 +126,16 @@ def set_runner(runner: CrontabRunner | None) -> None:
 
 
 def executable_path() -> str:
-    """The ``the-oracle`` entry point to call, absolute where we can find it."""
-    found = shutil.which("the-oracle")
+    """The ``oracle`` entry point to call, absolute where we can find it."""
+    found = shutil.which("oracle") or shutil.which("the-oracle")
     if found:
         return found
-    guess = Path(sys.executable).with_name("the-oracle")
+    guess = Path(sys.executable).with_name("oracle")
+    if not guess.exists():
+        guess = Path(sys.executable).with_name("the-oracle")
     if guess.exists():
         return str(guess)
-    return "the-oracle"
+    return "oracle"
 
 
 def cron_line(
@@ -206,7 +211,7 @@ def plan_install(
         return CrontabChange(
             action="install",
             changed=True,
-            reason="replacing the existing the-oracle line",
+            reason="replacing the existing oracle line",
             before=before,
             after=_joined([*kept, line]),
             added=(line,),
@@ -215,7 +220,7 @@ def plan_install(
     return CrontabChange(
         action="install",
         changed=True,
-        reason="adding the the-oracle line",
+        reason="adding the oracle line",
         before=before,
         after=_joined([*kept, line]),
         added=(line,),
@@ -230,7 +235,7 @@ def plan_uninstall(runner: CrontabRunner) -> CrontabChange:
         return CrontabChange(
             action="uninstall",
             changed=False,
-            reason="no the-oracle line is installed",
+            reason="no oracle line is installed",
             before=before,
             after=before,
         )
@@ -238,7 +243,7 @@ def plan_uninstall(runner: CrontabRunner) -> CrontabChange:
     return CrontabChange(
         action="uninstall",
         changed=True,
-        reason="removing the the-oracle line",
+        reason="removing the oracle line",
         before=before,
         after=_joined(kept),
         removed=tuple(existing),

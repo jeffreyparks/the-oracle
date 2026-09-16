@@ -1,4 +1,4 @@
-"""``the-oracle assess`` — run the adaptive diagnostic.
+"""``oracle assess`` — run the adaptive diagnostic.
 
 The orchestrator wires :data:`app` into ``cli.py``. This module owns the
 interactive surface only: ask, show the verdict, print the profile.

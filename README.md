@@ -14,28 +14,43 @@ sessions, and reminds you to come back.
 
 ```bash
 git clone <this repo> && cd the-oracle
-uv sync                       # add --extra embeddings for local semantic matching
+uv sync --extra embeddings          # the extra enables local semantic matching
+uv tool install --editable .        # puts `oracle` on your PATH
+```
+
+Now just type `oracle` from anywhere. No `uv run`, no activated venv.
+
+If `oracle` is not found, add uv's tool directory to your PATH:
+
+```bash
+uv tool update-shell    # then restart your shell
 ```
 
 **2. Add your keys**
 
+Put them in your data directory so `oracle` finds them from any folder:
+
 ```bash
-cp .env.example .env
+mkdir -p ~/.the-oracle
+cp .env.example ~/.the-oracle/.env
 ```
 
 Set `ANTHROPIC_API_KEY` (required) and `SERPER_API_KEY` (required to find
 resources on the web). Check they are visible:
 
 ```bash
-uv run the-oracle version
+oracle version
 ```
 
 It reports which keys are set. It never prints their values.
 
+A `.env` in the current directory, or any parent, also works — handy while
+developing. Real environment variables always win.
+
 **3. Install the starter subject**
 
 ```bash
-the-oracle init
+oracle init
 ```
 
 This copies the Bayesian forecasting pack into your data directory,
@@ -48,11 +63,11 @@ somewhere else, but never point it at this checkout.
 **4. Study**
 
 ```bash
-the-oracle domain list                      # what you can learn
-the-oracle assess bayesian_forecasting      # 12 questions, find your level
-the-oracle plan bayesian_forecasting        # your syllabus, honest hours
-the-oracle resources bayesian_forecasting --module m01_probability_foundations
-the-oracle study bayesian_forecasting       # a 25 minute session
+oracle domain list                      # what you can learn
+oracle assess bayesian_forecasting      # 12 questions, find your level
+oracle plan bayesian_forecasting        # your syllabus, honest hours
+oracle resources bayesian_forecasting --module m01_probability_foundations
+oracle study bayesian_forecasting       # a 25 minute session
 ```
 
 Run `resources` before `study`. The Oracle refuses to teach from an empty
@@ -61,9 +76,9 @@ corpus, and tells you the exact command to fix it.
 **5. Keep going**
 
 ```bash
-the-oracle review          # everything due now
-the-oracle report          # what moved this week, what is fading
-the-oracle cron install    # one crontab line, daily reminder
+oracle review          # everything due now
+oracle report          # what moved this week, what is fading
+oracle cron install    # one crontab line, daily reminder
 ```
 
 
@@ -77,7 +92,7 @@ the-oracle cron install    # one crontab line, daily reminder
 | `~/.the-oracle/oracle.db` | Progress, evidence log, corpus | no |
 | `data/packs/{objectives,domains}/` | **Seed** content shipped with the repo | yes |
 
-The repo ships seed packs only. `the-oracle init` copies them out; it never
+The repo ships seed packs only. `oracle init` copies them out; it never
 writes back. Nothing you do while studying touches the checkout.
 
 ---
@@ -85,7 +100,7 @@ writes back. Nothing you do while studying touches the checkout.
 ## Learning something else
 
 ```bash
-the-oracle domain add "Evaluate whether a forecast is well calibrated"
+oracle domain add "Evaluate whether a forecast is well calibrated"
 ```
 
 It interviews you about your goal, background, and time budget, then builds a
@@ -123,11 +138,11 @@ when every prerequisite is at 85% mastery. If that feels slow, it is the point.
 **Sessions end early when you fade.** The Oracle watches your accuracy against
 your own baseline, not a clock, and stops when the evidence says you are done.
 
-**Reminders stop the moment you ask.** `the-oracle learner pause` is permanent
+**Reminders stop the moment you ask.** `oracle learner pause` is permanent
 until you resume. There is no "are you sure".
 
 **Your progress is rebuildable.** Everything is derived from an append-only
-event log, so `the-oracle rebuild` can recompute your whole profile from scratch.
+event log, so `oracle rebuild` can recompute your whole profile from scratch.
 
 **It will tell you when a week went badly.** The weekly report does not spin a
 bad week, and it leaves out praise it cannot justify.
@@ -219,8 +234,11 @@ no vector database. One SQLite file, one directory of YAML, one CLI.
 ## Testing
 
 ```bash
-uv run pytest -q          # 470 tests, offline, no keys, no network
+uv run pytest -q          # 475 tests, offline, no keys, no network
 ```
+
+Development uses `uv run` as usual; `oracle` on your PATH is the editable
+install, so code changes take effect immediately.
 
 Every test runs without an API key. Tests cannot touch a real crontab. A live
 model is never called from the suite.

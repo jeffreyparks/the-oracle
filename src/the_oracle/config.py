@@ -45,7 +45,7 @@ def _load_dotenv_files() -> list[Path]:
     return loaded
 
 
-#: Populated at import time. ``the-oracle version`` reports it.
+#: Populated at import time. ``oracle version`` reports it.
 DOTENV_FILES: list[Path] = _load_dotenv_files()
 
 

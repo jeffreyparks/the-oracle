@@ -37,7 +37,7 @@ TEMPLATES: dict[Rung, str] = {
     Rung.QUIET: "",
     Rung.REMINDER: (
         "{due_clause}.\n"
-        "Run `the-oracle review` when you have a gap."
+        "Run `oracle review` when you have a gap."
     ),
     Rung.SMALLER_ASK: (
         "{idle_days} days since your last session. {due_clause}.\n"
@@ -45,13 +45,13 @@ TEMPLATES: dict[Rung, str] = {
     ),
     Rung.REPLAN: (
         "A week without a session. That is usually the plan, not you.\n"
-        "Run `the-oracle plan` to change the pace, or `the-oracle review` "
+        "Run `oracle plan` to change the pace, or `oracle review` "
         "to pick up where you stopped."
     ),
     Rung.PAUSE: (
         "Two weeks idle. Do you want to pause this plan?\n"
-        "`the-oracle learner pause` stops the reminders and keeps your progress. "
-        "`the-oracle review` starts again. Either is a fine answer."
+        "`oracle learner pause` stops the reminders and keeps your progress. "
+        "`oracle review` starts again. Either is a fine answer."
     ),
 }
 """One body per rung. Keys cover every :class:`Rung` member."""

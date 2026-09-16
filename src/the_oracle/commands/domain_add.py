@@ -1,4 +1,4 @@
-"""``the-oracle domain add`` — interview, draft, dedupe, commit.
+"""``oracle domain add`` — interview, draft, dedupe, commit.
 
 The orchestrator wires :data:`app` into ``cli.py`` under the ``domain`` group.
 This module owns the interactive surface only: ask the questions, show what the
